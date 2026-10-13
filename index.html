@@ -44,7 +44,7 @@ h2{font:700 1.1rem var(--f-display);margin:0 0 4px}
 .num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .tile{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--c)}
-.tile .ctry{display:flex;justify-content:space-between;align-items:center;gap:8px;font:600 1rem var(--f-display)}
+.tile .ctry{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font:600 1rem var(--f-display)}
 .tile .big{font:500 1.6rem var(--f-mono);font-variant-numeric:tabular-nums}
 .tile .big small{font-size:.8rem;color:var(--muted);margin-left:4px}
 .tile .meta{font-size:.84rem;color:var(--muted)}
@@ -115,11 +115,67 @@ label.chk input{width:auto;accent-color:var(--accent)}
 .ev .tags{display:flex;gap:6px;justify-content:flex-end;margin-top:4px}
 .ev.today{background:linear-gradient(90deg,var(--okbg),transparent 60%)}
 @media (max-width:640px){.ev{grid-template-columns:80px minmax(0,1fr)}.ev .c{grid-column:2}.ev .t{grid-column:1/-1}.ev .v{grid-column:1/-1;text-align:left}.ev .tags{justify-content:flex-start}}
+/* Encart 3DT, accordéon et petits écrans */
+.powered{display:flex;align-items:center;justify-content:flex-end;gap:8px;font:500 .7rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:-14px}
+.powered img{height:34px;width:auto;display:block}
+.powered .wm{font:700 .82rem var(--f-display);letter-spacing:.02em;text-transform:none;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:var(--surface)}
+.powered.has-logo .wm{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .powered img{filter:invert(1)}}
+:root[data-theme="dark"] .powered img{filter:invert(1)}
+.acc-bar{display:flex;justify-content:flex-end;margin-bottom:-16px}
+.acc-bar button{font:500 .8rem var(--f-mono);background:transparent;border:1px solid var(--line);color:var(--accent);padding:5px 10px;border-radius:6px;cursor:pointer}
+details.acc{padding:0}
+details.acc>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;border-radius:8px}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary:hover h2{color:var(--accent)}
+.acc-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.acc-t h2{margin:0}
+.acc-t .sub{margin:0}
+.acc-i{flex:none;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;position:relative}
+.acc-i::before{content:"";position:absolute;left:9px;top:7px;width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg)}
+details.acc[open] .acc-i::before{transform:rotate(-135deg);top:11px}
+details.acc[open]>summary{padding-bottom:12px}
+.acc-b{padding:0 18px 18px}
+@media (max-width:640px){
+  .page{padding-inline:14px;padding-block:14px 32px;gap:20px}
+  .powered{justify-content:flex-start;margin-bottom:-8px}
+  header{gap:10px}
+  header .hd{flex-basis:100%}
+  header h1{font-size:1.3rem}
+  header p{font-size:.95rem}
+  .views{margin-top:-4px}
+  .views button{flex:1;padding:10px 6px;font-size:.92rem}
+  .acc-bar{margin-bottom:-10px}
+  details.acc>summary{padding:13px 14px;gap:10px}
+  details.acc[open]>summary{padding-bottom:10px}
+  .acc-b{padding:0 14px 14px}
+  h2,.acc-t h2{font-size:1rem}
+  .acc-t .sub{font-size:.84rem}
+  .panel{padding:14px}
+  details.acc.panel{padding:0}
+  .tiles{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .tile{padding:12px}
+  .tile .big{font-size:1.3rem}
+  .tile .ctry{flex-wrap:wrap;justify-content:flex-start}
+  .tile .chip{white-space:normal}
+  .tabs button,.seg button{padding:6px 9px;font-size:.84rem}
+  .controls{gap:8px}
+  .controls label{flex:1 1 100%}
+  table{font-size:.84rem}
+  th,td{padding:7px 8px}
+  td.txt{min-width:170px}
+  .chart,.tbl{-webkit-overflow-scrolling:touch}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="page">
+<div class="powered">
+  <span data-i="powered"></span>
+  <img src="icons/3dt-logo.png" alt="3DT Consulting" onload="this.parentNode.classList.add('has-logo')" onerror="this.remove()">
+  <b class="wm">3DT Consulting</b>
+</div>
 <header>
   <div class="hd">
     <div class="eyebrow" data-i="eyebrow"></div>
@@ -138,31 +194,35 @@ label.chk input{width:auto;accent-color:var(--accent)}
 </nav>
 
 <div id="v-taux" class="view">
-<section>
-  <h2 data-i="tiles_h"></h2>
-  <p class="sub" data-i="tiles_sub"></p>
+<div class="acc-bar"><button type="button" id="accall" data-i="acc_open"></button></div>
+<details class="panel acc" data-acc="tiles" open>
+  <summary><span class="acc-t"><h2 data-i="tiles_h"></h2><span class="sub" data-i="tiles_sub"></span></span><span class="acc-i" aria-hidden="true"></span></summary>
+  <div class="acc-b">
   <div class="tiles" id="tiles"></div>
-</section>
+  </div>
+</details>
 
-<section class="panel">
-  <h2 data-i="curve_h"></h2>
-  <p class="sub" data-i="curve_sub"></p>
+<details class="panel acc" data-acc="curve">
+  <summary><span class="acc-t"><h2 data-i="curve_h"></h2><span class="sub" data-i="curve_sub"></span></span><span class="acc-i" aria-hidden="true"></span></summary>
+  <div class="acc-b">
   <div class="controls"><label for="cmp"><span data-i="cmp_label"></span><select id="cmp"></select></label></div>
   <div class="chart" id="chart"></div>
   <div class="legend" id="legend"></div>
-</section>
+  </div>
+</details>
 
-<section class="panel">
-  <h2 data-i="hist_h"></h2>
-  <p class="sub" data-i="hist_sub"></p>
+<details class="panel acc" data-acc="hist">
+  <summary><span class="acc-t"><h2 data-i="hist_h"></h2><span class="sub" data-i="hist_sub"></span></span><span class="acc-i" aria-hidden="true"></span></summary>
+  <div class="acc-b">
   <div class="controls"><div class="seg" id="range" role="group"></div></div>
   <div class="chart" id="hist"></div>
   <div class="legend" id="hlegend"></div>
-</section>
+  </div>
+</details>
 
-<section class="panel">
-  <h2 data-i="cal_h"></h2>
-  <p class="sub" data-i="cal_sub"></p>
+<details class="panel acc" data-acc="cal">
+  <summary><span class="acc-t"><h2 data-i="cal_h"></h2><span class="sub" data-i="cal_sub"></span></span><span class="acc-i" aria-hidden="true"></span></summary>
+  <div class="acc-b">
   <div class="controls">
     <div class="seg" id="calv" role="group"></div>
     <div class="seg" id="calc" role="group"></div>
@@ -172,19 +232,21 @@ label.chk input{width:auto;accent-color:var(--accent)}
   <div id="cal"></div>
   <div class="legend" id="callegend"></div>
   <p class="note" id="calnote"></p>
-</section>
+  </div>
+</details>
 
-<section class="panel">
-  <h2 data-i="table_h"></h2>
-  <p class="sub" data-i="table_sub"></p>
+<details class="panel acc" data-acc="table">
+  <summary><span class="acc-t"><h2 data-i="table_h"></h2><span class="sub" data-i="table_sub"></span></span><span class="acc-i" aria-hidden="true"></span></summary>
+  <div class="acc-b">
   <div class="tabs" role="tablist" id="tabs"></div>
   <div class="tbl" id="table"></div>
   <p class="note" id="tnote"></p>
-</section>
+  </div>
+</details>
 
-<section class="panel">
-  <h2 data-i="tool_h"></h2>
-  <p class="sub" data-i="tool_sub"></p>
+<details class="panel acc" data-acc="tool">
+  <summary><span class="acc-t"><h2 data-i="tool_h"></h2><span class="sub" data-i="tool_sub"></span></span><span class="acc-i" aria-hidden="true"></span></summary>
+  <div class="acc-b">
   <form class="tool" id="tool">
     <label for="isin"><span data-i="tool_line"></span><select id="isin"></select></label>
     <label for="px"><span data-i="tool_px"></span><input id="px" inputmode="decimal" autocomplete="off"></label>
@@ -192,13 +254,16 @@ label.chk input{width:auto;accent-color:var(--accent)}
   </form>
   <div class="result" id="result"></div>
   <p class="note" data-i="tool_note"></p>
-</section>
+  </div>
+</details>
 
-<section class="panel">
-  <h2 data-i="src_h"></h2>
+<details class="panel acc" data-acc="src">
+  <summary><span class="acc-t"><h2 data-i="src_h"></h2></span><span class="acc-i" aria-hidden="true"></span></summary>
+  <div class="acc-b">
   <ul class="src" data-i="src_list"></ul>
   <p class="note" data-i="src_note"></p>
-</section>
+  </div>
+</details>
 </div>
 
 <div id="v-comp" class="view" hidden>
@@ -240,6 +305,7 @@ eyebrow:"Stealth AM · contre-valorisation",
 h1:"Suivi des taux courts souverains : France, Allemagne, Italie, Espagne",
 intro:"Prix par ISIN et courbes officielles pour contrôler les exécutions IB. Les données sont mises à jour chaque jour ouvré et chaque relevé est conservé pour l'historique.",
 tab_rates:"Taux et émissions",tab_comp:"Concurrence",
+powered:"Powered by",acc_open:"Tout déplier",acc_close:"Tout replier",
 tiles_h:"Niveau à environ un an, par pays",
 tiles_sub:"Rendement de la ligne la plus proche de 12 mois dans le dernier relevé (France : taux de l'échéance constante à 1 an), et variation depuis le relevé précédent.",
 curve_h:"Courbe des taux courts",
@@ -278,6 +344,7 @@ eyebrow:"Stealth AM · independent price check",
 h1:"Short-term sovereign rates monitor: France, Germany, Italy, Spain",
 intro:"ISIN-level prices and official curves to check IB executions. Data are updated every business day and every snapshot is kept for history.",
 tab_rates:"Rates and issuance",tab_comp:"Competition",
+powered:"Powered by",acc_open:"Expand all",acc_close:"Collapse all",
 tiles_h:"Around one year, by country",
 tiles_sub:"Yield of the line closest to 12 months in the latest snapshot (France: 1-year constant maturity rate), and change since the previous snapshot.",
 curve_h:"Short-term yield curve",
@@ -717,6 +784,7 @@ function applyLang(){
   document.querySelectorAll("[data-i]").forEach(el=>{const v=S[LANG][el.dataset.i];if(v!=null)el.innerHTML=v;});
   [...document.getElementById("lang").children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===LANG));
   buildRange();buildCalControls();buildComp();renderAll();renderComp();
+  try{accLabel()}catch(e){}
 }
 document.getElementById("lang").addEventListener("click",e=>{const b=e.target.closest("button[data-l]");if(!b||b.dataset.l===LANG)return;LANG=b.dataset.l;try{localStorage.setItem("lang",LANG)}catch(err){}applyLang();});
 
@@ -727,6 +795,14 @@ window.addEventListener("hashchange",()=>showView(location.hash==="#concurrence"
 const redraw=()=>{drawCurve();drawHist();renderCal();renderComp();};
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change",redraw);
 new MutationObserver(redraw).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+// ---------- Accordéon de l'onglet Taux et émissions ----------
+const ACCS=[...document.querySelectorAll("details.acc")];
+try{const st=JSON.parse(localStorage.getItem("acc")||"null");if(st)ACCS.forEach(d=>{if(d.dataset.acc in st)d.open=!!st[d.dataset.acc];});}catch(e){}
+function accLabel(){document.getElementById("accall").textContent=S[LANG][ACCS.every(d=>d.open)?"acc_close":"acc_open"];}
+ACCS.forEach(d=>d.addEventListener("toggle",()=>{accLabel();try{localStorage.setItem("acc",JSON.stringify(Object.fromEntries(ACCS.map(x=>[x.dataset.acc,x.open]))))}catch(e){}}));
+document.getElementById("accall").addEventListener("click",()=>{const o=!ACCS.every(d=>d.open);ACCS.forEach(d=>{d.open=o;});});
+accLabel();
 
 // ---------- Données : fichiers JSON publiés avec l'application ----------
 async function loadJSON(n){const r=await fetch(`data/${n}.json?t=${Date.now()}`,{cache:"no-store"});if(!r.ok)throw new Error(n+" "+r.status);return r.json();}
