@@ -1,0 +1,445 @@
+{
+ "DE-2026-10-06": {
+  "country": "DE",
+  "date": "2026-10-06",
+  "kind": "isin",
+  "source": "Bundesbank, prix de référence",
+  "lines": [
+   {
+    "isin": "DE0001141844",
+    "label": "OBL 0 09/10/26",
+    "maturity": "2026-10-09",
+    "price": 99.995,
+    "yield": 1.84
+   },
+   {
+    "isin": "DE000BU22072",
+    "label": "BKO 2 10/12/26",
+    "maturity": "2026-12-10",
+    "price": 99.9,
+    "yield": 2.57
+   },
+   {
+    "isin": "DE0001102416",
+    "label": "DBR 0,25 15/02/27",
+    "maturity": "2027-02-15",
+    "price": 99.155,
+    "yield": 2.66
+   },
+   {
+    "isin": "DE000BU22080",
+    "label": "BKO 2,2 11/03/27",
+    "maturity": "2027-03-11",
+    "price": 99.8,
+    "yield": 2.67
+   },
+   {
+    "isin": "DE0001141851",
+    "label": "OBL 0 16/04/27",
+    "maturity": "2027-04-16",
+    "price": 98.605,
+    "yield": 2.74
+   },
+   {
+    "isin": "DE000BU22098",
+    "label": "BKO 1,7 10/06/27",
+    "maturity": "2027-06-10",
+    "price": 99.265,
+    "yield": 2.81
+   },
+   {
+    "isin": "DE0001135044",
+    "label": "DBR 6,5 04/07/27",
+    "maturity": "2027-07-04",
+    "price": 102.61,
+    "yield": 2.85
+   },
+   {
+    "isin": "DE0001102424",
+    "label": "DBR 0,5 15/08/27",
+    "maturity": "2027-08-15",
+    "price": 98.005,
+    "yield": 2.9
+   },
+   {
+    "isin": "DE000BU22106",
+    "label": "BKO 1,9 16/09/27",
+    "maturity": "2027-09-16",
+    "price": 99.05,
+    "yield": 2.94
+   },
+   {
+    "isin": "DE0001030740",
+    "label": "OBL 1,3 15/10/27 vert",
+    "maturity": "2027-10-15",
+    "price": 98.375,
+    "yield": 2.94
+   },
+   {
+    "isin": "DE0001141869",
+    "label": "OBL 1,3 15/10/27",
+    "maturity": "2027-10-15",
+    "price": 98.36,
+    "yield": 2.96
+   },
+   {
+    "isin": "DE0001102523",
+    "label": "DBR 0 15/11/27",
+    "maturity": "2027-11-15",
+    "price": 96.835,
+    "yield": 2.96
+   },
+   {
+    "isin": "DE000BU22114",
+    "label": "BKO 2 16/12/27",
+    "maturity": "2027-12-16",
+    "price": 98.845,
+    "yield": 3.0
+   }
+  ]
+ },
+ "DE-2026-10-08": {
+  "country": "DE",
+  "date": "2026-10-08",
+  "kind": "isin",
+  "source": "Bundesbank, prix de référence",
+  "lines": [
+   {
+    "isin": "DE000BU22072",
+    "label": "BKO 2 10/12/26",
+    "maturity": "2026-12-10",
+    "price": 99.91,
+    "yield": 2.55
+   },
+   {
+    "isin": "DE0001102416",
+    "label": "DBR 0,25 15/02/27",
+    "maturity": "2027-02-15",
+    "price": 99.2,
+    "yield": 2.62
+   },
+   {
+    "isin": "DE000BU22080",
+    "label": "BKO 2,2 11/03/27",
+    "maturity": "2027-03-11",
+    "price": 99.805,
+    "yield": 2.67
+   },
+   {
+    "isin": "DE0001141851",
+    "label": "OBL 0 16/04/27",
+    "maturity": "2027-04-16",
+    "price": 98.64,
+    "yield": 2.74
+   },
+   {
+    "isin": "DE000BU22098",
+    "label": "BKO 1,7 10/06/27",
+    "maturity": "2027-06-10",
+    "price": 99.285,
+    "yield": 2.8
+   },
+   {
+    "isin": "DE0001135044",
+    "label": "DBR 6,5 04/07/27",
+    "maturity": "2027-07-04",
+    "price": 102.582,
+    "yield": 2.82
+   },
+   {
+    "isin": "DE0001102424",
+    "label": "DBR 0,5 15/08/27",
+    "maturity": "2027-08-15",
+    "price": 98.065,
+    "yield": 2.87
+   },
+   {
+    "isin": "DE000BU22106",
+    "label": "BKO 1,9 16/09/27",
+    "maturity": "2027-09-16",
+    "price": 99.075,
+    "yield": 2.92
+   },
+   {
+    "isin": "DE0001030740",
+    "label": "OBL 1,3 15/10/27 vert",
+    "maturity": "2027-10-15",
+    "price": 98.405,
+    "yield": 2.93
+   },
+   {
+    "isin": "DE0001141869",
+    "label": "OBL 1,3 15/10/27",
+    "maturity": "2027-10-15",
+    "price": 98.395,
+    "yield": 2.94
+   },
+   {
+    "isin": "DE0001102523",
+    "label": "DBR 0 15/11/27",
+    "maturity": "2027-11-15",
+    "price": 96.885,
+    "yield": 2.94
+   },
+   {
+    "isin": "DE000BU22114",
+    "label": "BKO 2 16/12/27",
+    "maturity": "2027-12-16",
+    "price": 98.875,
+    "yield": 2.98
+   }
+  ]
+ },
+ "ES-2026-08-04": {
+  "country": "ES",
+  "date": "2026-08-04",
+  "kind": "auction",
+  "source": "Adjudication Letras (source secondaire)",
+  "note": "taux marginaux",
+  "lines": [
+   {
+    "label": "Letras 6 mois",
+    "days": 182,
+    "yield": 2.512
+   },
+   {
+    "label": "Letras 12 mois",
+    "days": 364,
+    "yield": 2.679
+   }
+  ]
+ },
+ "FR-2026-09-14": {
+  "country": "FR",
+  "date": "2026-09-14",
+  "kind": "auction",
+  "source": "Adjudication BTF (source secondaire)",
+  "note": "taux moyens pondérés",
+  "lines": [
+   {
+    "label": "BTF 14 semaines",
+    "days": 98,
+    "yield": 2.654
+   },
+   {
+    "label": "BTF 25 semaines",
+    "days": 175,
+    "yield": 2.868
+   },
+   {
+    "label": "BTF 51 semaines",
+    "days": 357,
+    "yield": 3.208
+   }
+  ]
+ },
+ "IT-2026-10-07": {
+  "country": "IT",
+  "date": "2026-10-07",
+  "kind": "isin",
+  "source": "Borsa Italiana (MOT), dernier cours",
+  "lines": [
+   {
+    "isin": "IT0005674335",
+    "label": "BOT oct. 2026",
+    "maturity": "2026-10-14",
+    "price": 99.956
+   },
+   {
+    "isin": "IT0005678492",
+    "label": "BOT nov. 2026",
+    "maturity": "2026-11-13",
+    "price": 99.762
+   },
+   {
+    "isin": "IT0005684888",
+    "label": "BOT déc. 2026",
+    "maturity": "2026-12-14",
+    "price": 99.529
+   },
+   {
+    "isin": "IT0005689887",
+    "label": "BOT janv. 2027",
+    "maturity": "2027-01-14",
+    "price": 99.276
+   },
+   {
+    "isin": "IT0005695256",
+    "label": "BOT févr. 2027",
+    "maturity": "2027-02-12",
+    "price": 99.056
+   },
+   {
+    "isin": "IT0005699340",
+    "label": "BOT mars 2027",
+    "maturity": "2027-03-12",
+    "price": 98.96
+   },
+   {
+    "isin": "IT0005704447",
+    "label": "BOT avr. 2027",
+    "maturity": "2027-04-14",
+    "price": 98.53
+   },
+   {
+    "isin": "IT0005709289",
+    "label": "BOT mai 2027",
+    "maturity": "2027-05-14",
+    "price": 98.261
+   },
+   {
+    "isin": "IT0005711749",
+    "label": "BOT nov. 2026 (S)",
+    "maturity": "2026-11-30",
+    "price": 99.621
+   },
+   {
+    "isin": "IT0005716714",
+    "label": "BOT juin 2027",
+    "maturity": "2027-06-14",
+    "price": 97.984
+   },
+   {
+    "isin": "IT0005719536",
+    "label": "BOT déc. 2026 (S)",
+    "maturity": "2026-12-31",
+    "price": 99.387
+   },
+   {
+    "isin": "IT0005722514",
+    "label": "BOT juil. 2027",
+    "maturity": "2027-07-14",
+    "price": 97.731
+   },
+   {
+    "isin": "IT0005725236",
+    "label": "BOT janv. 2027 (S)",
+    "maturity": "2027-01-29",
+    "price": 99.153
+   },
+   {
+    "isin": "IT0005729220",
+    "label": "BOT août 2027",
+    "maturity": "2027-08-13",
+    "price": 97.444
+   },
+   {
+    "isin": "IT0005730681",
+    "label": "BOT sept. 2027",
+    "maturity": "2027-09-14",
+    "price": 97.191
+   },
+   {
+    "isin": "IT0005733115",
+    "label": "BOT mars 2027 (S)",
+    "maturity": "2027-03-31",
+    "price": 98.645
+   }
+  ]
+ },
+ "IT-2026-10-13": {
+  "country": "IT",
+  "date": "2026-10-13",
+  "kind": "isin",
+  "source": "Borsa Italiana (MOT), dernier cours",
+  "note": "relevé à 9 h 55, peut inclure des cours de la veille",
+  "lines": [
+   {
+    "isin": "IT0005674335",
+    "label": "BOT oct. 2026",
+    "maturity": "2026-10-14",
+    "price": 99.992
+   },
+   {
+    "isin": "IT0005678492",
+    "label": "BOT nov. 2026",
+    "maturity": "2026-11-13",
+    "price": 99.791
+   },
+   {
+    "isin": "IT0005684888",
+    "label": "BOT déc. 2026",
+    "maturity": "2026-12-14",
+    "price": 99.573
+   },
+   {
+    "isin": "IT0005689887",
+    "label": "BOT janv. 2027",
+    "maturity": "2027-01-14",
+    "price": 99.323
+   },
+   {
+    "isin": "IT0005695256",
+    "label": "BOT févr. 2027",
+    "maturity": "2027-02-12",
+    "price": 99.082
+   },
+   {
+    "isin": "IT0005699340",
+    "label": "BOT mars 2027",
+    "maturity": "2027-03-12",
+    "price": 98.866
+   },
+   {
+    "isin": "IT0005704447",
+    "label": "BOT avr. 2027",
+    "maturity": "2027-04-14",
+    "price": 98.564
+   },
+   {
+    "isin": "IT0005709289",
+    "label": "BOT mai 2027",
+    "maturity": "2027-05-14",
+    "price": 98.309
+   },
+   {
+    "isin": "IT0005711749",
+    "label": "BOT nov. 2026 (S)",
+    "maturity": "2026-11-30",
+    "price": 99.659
+   },
+   {
+    "isin": "IT0005716714",
+    "label": "BOT juin 2027",
+    "maturity": "2027-06-14",
+    "price": 98.001
+   },
+   {
+    "isin": "IT0005719536",
+    "label": "BOT déc. 2026 (S)",
+    "maturity": "2026-12-31",
+    "price": 99.426
+   },
+   {
+    "isin": "IT0005722514",
+    "label": "BOT juil. 2027",
+    "maturity": "2027-07-14",
+    "price": 97.765
+   },
+   {
+    "isin": "IT0005725236",
+    "label": "BOT janv. 2027 (S)",
+    "maturity": "2027-01-29",
+    "price": 99.181
+   },
+   {
+    "isin": "IT0005729220",
+    "label": "BOT août 2027",
+    "maturity": "2027-08-13",
+    "price": 97.46
+   },
+   {
+    "isin": "IT0005730681",
+    "label": "BOT sept. 2027",
+    "maturity": "2027-09-14",
+    "price": 97.217
+   },
+   {
+    "isin": "IT0005733115",
+    "label": "BOT mars 2027 (S)",
+    "maturity": "2027-03-31",
+    "price": 98.675
+   }
+  ]
+ }
+}

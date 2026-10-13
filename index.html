@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Stealth AM · Suivi des taux courts</title>
+<meta name="description" content="Suivi quotidien des taux courts souverains (France, Allemagne, Italie, Espagne), calendrier des émissions et paysage des fonds monétaires en euros.">
+<meta name="theme-color" content="#1f5f8b">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Suivi taux">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : en-tête et sélecteur de langue, deux vues (taux et émissions / concurrence), panneaux empilés */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --ink:#16202c; --muted:#5b6675; --line:#dde1e7; --accent:#1f5f8b;
+  --fr:#2f5fd0; --de:#b07a12; --it:#1e8a5a; --es:#c2413b;
+  --ok:#1e7a4c; --warn:#a46a00; --bad:#b3362f; --okbg:#e3f3ea; --warnbg:#fbf0d9; --badbg:#f9e1df;
+  --f-display:"Archivo",system-ui,sans-serif; --f-body:"Source Sans 3",system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10151c; --surface:#171e27; --ink:#e6ebf1; --muted:#97a3b3; --line:#2a3440; --accent:#6aa9d8;
+  --fr:#7c9ff0; --de:#e0a93f; --it:#4cc48d; --es:#ef7a72;
+  --ok:#5fd396; --warn:#f0b54a; --bad:#f08a82; --okbg:#173326; --warnbg:#3a2d12; --badbg:#3d1d1b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151c; --surface:#171e27; --ink:#e6ebf1; --muted:#97a3b3; --line:#2a3440; --accent:#6aa9d8;
+  --fr:#7c9ff0; --de:#e0a93f; --it:#4cc48d; --es:#ef7a72;
+  --ok:#5fd396; --warn:#f0b54a; --bad:#f08a82; --okbg:#173326; --warnbg:#3a2d12; --badbg:#3d1d1b; color-scheme:dark}
+html{color-scheme:light}
+body{margin:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--bg);color:var(--ink);font:16px/1.5 var(--f-body)}
+.page{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:28px 48px;display:flex;flex-direction:column;gap:28px}
+header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+header .hd{min-width:0;flex:1 1 520px}
+header h1{font:700 1.7rem/1.15 var(--f-display);margin:0 0 6px;text-wrap:balance}
+header p{margin:0;color:var(--muted);max-width:68ch}
+.eyebrow{font:500 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.run{font:500 .78rem var(--f-mono);color:var(--muted);margin-top:8px}
+h2{font:700 1.1rem var(--f-display);margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 14px;font-size:.92rem;max-width:80ch}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--c)}
+.tile .ctry{display:flex;justify-content:space-between;align-items:center;gap:8px;font:600 1rem var(--f-display)}
+.tile .big{font:500 1.6rem var(--f-mono);font-variant-numeric:tabular-nums}
+.tile .big small{font-size:.8rem;color:var(--muted);margin-left:4px}
+.tile .meta{font-size:.84rem;color:var(--muted)}
+.tile .delta{font:500 .82rem var(--f-mono)}
+.chip{font:500 .7rem var(--f-mono);letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.chip.ok{background:var(--okbg);color:var(--ok)} .chip.warn{background:var(--warnbg);color:var(--warn)} .chip.bad{background:var(--badbg);color:var(--bad)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;min-width:0}
+.empty{padding:28px 18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:8px}
+.chart{width:100%;overflow-x:auto}
+svg text{fill:var(--muted);font:11px var(--f-mono)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.88rem;margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:0;border-top:3px solid;display:inline-block}
+.legend i.dash{border-top-style:dashed}
+.legend i.dot{width:10px;height:10px;border-radius:50%;border:2px solid}
+.legend i.sq{width:11px;height:11px;border:0;border-radius:2px;background:var(--c)}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin-bottom:10px}
+.controls label,.tool label{display:flex;flex-direction:column;gap:4px;font-size:.84rem;color:var(--muted);min-width:0}
+select,input{font:15px var(--f-mono);padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);min-width:0;width:100%}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button,.seg button{font:600 .9rem var(--f-body);border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer}
+.tabs button[aria-selected="true"],.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.seg{display:flex;gap:4px;flex-wrap:wrap}
+.seg.lang button{font:500 .8rem var(--f-mono);padding:5px 10px}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th{font:500 .72rem var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:bottom}
+td{padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
+td.r,th.r{text-align:right}
+td.txt{white-space:normal;min-width:200px;max-width:320px}
+td.yc{min-width:170px;max-width:220px;white-space:normal}
+td .sm{display:block;font-size:.8rem;color:var(--muted);margin-top:2px;white-space:normal}
+td details{margin-top:4px;font-size:.8rem;color:var(--muted)}
+td details summary{cursor:pointer;color:var(--accent);list-style:none;display:inline}
+td details summary::-webkit-details-marker{display:none}
+td details summary::before{content:"+ "}
+td details[open] summary::before{content:"− "}
+td details p{margin:4px 0 0;max-width:46ch}
+.note{font-size:.84rem;color:var(--muted);margin-top:10px;max-width:80ch}
+.tool{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;align-items:end}
+.result{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.result div{border-left:3px solid var(--sev,var(--line));padding-left:10px}
+.result b{display:block;font:500 1.15rem var(--f-mono);font-variant-numeric:tabular-nums}
+.result span{font-size:.8rem;color:var(--muted)}
+ul.src{margin:0;padding-left:18px;font-size:.9rem;display:flex;flex-direction:column;gap:4px}
+a{color:var(--accent)}
+.views{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-top:-8px}
+.views button{font:600 .98rem var(--f-display);background:transparent;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:10px 14px;cursor:pointer}
+.views button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.view{display:flex;flex-direction:column;gap:28px}
+.view[hidden]{display:none!important}
+th.sort{cursor:pointer}
+th.sort[aria-sort]::after{content:" ▾";color:var(--accent)}
+th.sort[aria-sort="ascending"]::after{content:" ▴"}
+.cat{display:inline-flex;align-items:center;gap:6px}
+.cat i{width:9px;height:9px;border-radius:2px;background:var(--c);display:inline-block;flex:none}
+label.chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink);font-size:.9rem;cursor:pointer}
+label.chk input{width:auto;accent-color:var(--accent)}
+.week{font:500 .72rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:14px 0 6px;border-bottom:1px solid var(--line)}
+.ev{display:grid;grid-template-columns:92px 120px minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line)}
+.ev .d{font:500 .88rem var(--f-mono);font-variant-numeric:tabular-nums}
+.ev .c{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;color:var(--muted)}
+.ev .c i{width:9px;height:9px;border-radius:50%;background:var(--c);display:inline-block}
+.ev .t b{font-weight:600}
+.ev .t span{display:block;font-size:.84rem;color:var(--muted)}
+.ev .v{font:500 .86rem var(--f-mono);text-align:right;white-space:nowrap}
+.ev .tags{display:flex;gap:6px;justify-content:flex-end;margin-top:4px}
+.ev.today{background:linear-gradient(90deg,var(--okbg),transparent 60%)}
+@media (max-width:640px){.ev{grid-template-columns:80px minmax(0,1fr)}.ev .c{grid-column:2}.ev .t{grid-column:1/-1}.ev .v{grid-column:1/-1;text-align:left}.ev .tags{justify-content:flex-start}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="hd">
+    <div class="eyebrow" data-i="eyebrow"></div>
+    <h1 data-i="h1"></h1>
+    <p data-i="intro"></p>
+    <div class="run" id="run"></div>
+  </div>
+  <div class="seg lang" id="lang" role="group" aria-label="Langue / Language">
+    <button type="button" data-l="fr" aria-pressed="true">FR</button>
+    <button type="button" data-l="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+<nav class="views" role="tablist">
+  <button type="button" role="tab" id="t-taux" aria-selected="true" aria-controls="v-taux" data-i="tab_rates"></button>
+  <button type="button" role="tab" id="t-comp" aria-selected="false" aria-controls="v-comp" data-i="tab_comp"></button>
+</nav>
+
+<div id="v-taux" class="view">
+<section>
+  <h2 data-i="tiles_h"></h2>
+  <p class="sub" data-i="tiles_sub"></p>
+  <div class="tiles" id="tiles"></div>
+</section>
+
+<section class="panel">
+  <h2 data-i="curve_h"></h2>
+  <p class="sub" data-i="curve_sub"></p>
+  <div class="controls"><label for="cmp"><span data-i="cmp_label"></span><select id="cmp"></select></label></div>
+  <div class="chart" id="chart"></div>
+  <div class="legend" id="legend"></div>
+</section>
+
+<section class="panel">
+  <h2 data-i="hist_h"></h2>
+  <p class="sub" data-i="hist_sub"></p>
+  <div class="controls"><div class="seg" id="range" role="group"></div></div>
+  <div class="chart" id="hist"></div>
+  <div class="legend" id="hlegend"></div>
+</section>
+
+<section class="panel">
+  <h2 data-i="cal_h"></h2>
+  <p class="sub" data-i="cal_sub"></p>
+  <div class="controls">
+    <div class="seg" id="calv" role="group"></div>
+    <div class="seg" id="calc" role="group"></div>
+    <div class="seg" id="calh" role="group"></div>
+    <label class="chk" for="calshort"><input type="checkbox" id="calshort" checked> <span data-i="cal_short"></span></label>
+  </div>
+  <div id="cal"></div>
+  <div class="legend" id="callegend"></div>
+  <p class="note" id="calnote"></p>
+</section>
+
+<section class="panel">
+  <h2 data-i="table_h"></h2>
+  <p class="sub" data-i="table_sub"></p>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="tbl" id="table"></div>
+  <p class="note" id="tnote"></p>
+</section>
+
+<section class="panel">
+  <h2 data-i="tool_h"></h2>
+  <p class="sub" data-i="tool_sub"></p>
+  <form class="tool" id="tool">
+    <label for="isin"><span data-i="tool_line"></span><select id="isin"></select></label>
+    <label for="px"><span data-i="tool_px"></span><input id="px" inputmode="decimal" autocomplete="off"></label>
+    <label for="side"><span data-i="tool_side"></span><select id="side"><option value="buy" data-i="buy"></option><option value="sell" data-i="sell"></option></select></label>
+  </form>
+  <div class="result" id="result"></div>
+  <p class="note" data-i="tool_note"></p>
+</section>
+
+<section class="panel">
+  <h2 data-i="src_h"></h2>
+  <ul class="src" data-i="src_list"></ul>
+  <p class="note" data-i="src_note"></p>
+</section>
+</div>
+
+<div id="v-comp" class="view" hidden>
+<section>
+  <h2 data-i="c_h"></h2>
+  <p class="sub" data-i="c_sub"></p>
+  <div class="tiles" id="ctiles"></div>
+</section>
+<section class="panel">
+  <h2 data-i="cc_h"></h2>
+  <p class="sub" data-i="cc_sub"></p>
+  <div class="controls">
+    <div class="seg" id="ccat" role="group"></div>
+    <label for="ctype"><span data-i="c_type"></span><select id="ctype"></select></label>
+  </div>
+  <div class="chart" id="cchart"></div>
+</section>
+<section class="panel">
+  <h2 data-i="ct_h"></h2>
+  <p class="sub" data-i="ct_sub"></p>
+  <div class="tbl" id="ctable"></div>
+</section>
+<section class="panel">
+  <h2 data-i="tk_h"></h2>
+  <p class="sub" data-i="tk_sub"></p>
+  <div class="tbl" id="ttable"></div>
+  <p class="note" id="mnote"></p>
+</section>
+</div>
+</div>
+
+<script>
+// ---------- Langue ----------
+let LANG="fr";
+try{const s=localStorage.getItem("lang");if(s==="en"||s==="fr")LANG=s;}catch(e){}
+const S={
+fr:{
+eyebrow:"Stealth AM · contre-valorisation",
+h1:"Suivi des taux courts souverains : France, Allemagne, Italie, Espagne",
+intro:"Prix par ISIN et courbes officielles pour contrôler les exécutions IB. Les données sont mises à jour chaque jour ouvré et chaque relevé est conservé pour l'historique.",
+tab_rates:"Taux et émissions",tab_comp:"Concurrence",
+tiles_h:"Niveau à environ un an, par pays",
+tiles_sub:"Rendement de la ligne la plus proche de 12 mois dans le dernier relevé (France : taux de l'échéance constante à 1 an), et variation depuis le relevé précédent.",
+curve_h:"Courbe des taux courts",
+curve_sub:"Rendement en % selon la durée résiduelle, jusqu'à 15 mois. Points pleins : prix de marché par ISIN. Points creux : taux d'adjudication. Choisir une date pour superposer une courbe passée en pointillés.",
+cmp_label:"Comparer avec le relevé du",
+hist_h:"Historique des taux à 1 et 2 ans",
+hist_sub:"Allemagne : courbe officielle de la Bundesbank (méthode de Svensson). France : taux de l'échéance constante (TEC) publiés par la Banque de France. Italie et Espagne : point le plus proche de 12 mois de chaque relevé enregistré.",
+cal_h:"Calendrier des émissions souveraines",
+cal_sub:"Adjudications à venir des quatre émetteurs. Les titres courts (BTF, Bubills, BOT, Letras) sont les rendez-vous qui comptent pour le fonds monétaire. Les dates marquées « indicatif » restent à confirmer par l'émetteur. L'histogramme compte les adjudications par semaine.",
+cal_short:"Titres courts uniquement",
+table_h:"Détail par ligne",
+table_sub:"Dernier relevé de chaque pays ; rendements italiens calculés ici à partir du dernier cours.",
+tool_h:"Contrôle d'une exécution",
+tool_sub:"Saisir le prix obtenu chez IB sur une ligne allemande ou italienne : l'écart avec le dernier prix de référence s'affiche en points de base.",
+tool_line:"Ligne",tool_px:"Prix d'exécution (pied de coupon)",tool_side:"Sens",buy:"Achat",sell:"Vente",
+tool_note:"Seuils indicatifs à calibrer dans la politique de sélection : au-delà de 3 pb défavorables, analyse documentée ; au-delà de 10 pb, escalade au RCCI. Le prix de référence a sa propre date : un écart peut venir du mouvement de marché depuis cette date.",
+src_h:"Sources et limites",
+src_list:`<li><a href="https://www.bundesbank.de/en/service/federal-securities/prices-and-yields" target="_blank" rel="noopener">Bundesbank, prix et rendements des titres fédéraux cotés</a> : prix de référence par ISIN fixé vers midi à Francfort. Le fichier mensuel ne se lit automatiquement que sur les premiers jours du mois ; au-delà, le relevé par ISIN peut dater de quelques jours.</li>
+<li><a href="https://api.statistiken.bundesbank.de/rest/data/BBSIS/D.I.ZST.ZI.EUR.S1311.B.A604.R02XX.R.A.A._Z._Z.A?startPeriod=2026-04-01" target="_blank" rel="noopener">Bundesbank, courbe des taux des titres fédéraux (Svensson)</a> : valeurs quotidiennes officielles à 1 et 2 ans.</li>
+<li><a href="https://webstat.banque-france.fr/fr/catalogue/fm/FM.D.FR.EUR.FR2.BB.FRMOYTEC1.HSTA" target="_blank" rel="noopener">Banque de France (Webstat), taux de l'échéance constante à 1 et 2 ans</a> : valeurs quotidiennes officielles. Webstat ne publie pas de taux des BTF sous un an ; la courbe française sous un an reste un repère d'adjudication.</li>
+<li><a href="https://www.borsaitaliana.it/borsa/obbligazioni/mot/bot/lista.html" target="_blank" rel="noopener">Borsa Italiana, liste des BOT sur le MOT</a> : dernier cours, marché de détail, données différées.</li>
+<li><a href="https://dettedelafrance.fr/actualites/btf-la-france-leve-6-991-milliards-d-euros-en-dette-court-terme" target="_blank" rel="noopener">Adjudication de BTF du 14 septembre 2026</a> : source secondaire, repère pour les BTF.</li>
+<li><a href="https://www.bolsamania.com/noticias_amp/economia/tesoro-coloca-62155-millones-letras-eleva-interes-12-meses--23181738.html" target="_blank" rel="noopener">Adjudication de Letras du 4 août 2026</a> : source secondaire, taux marginaux, en attendant un accès au Tesoro ou à la Banque d'Espagne.</li>`,
+src_note:"Ces données servent au contrôle de vraisemblance et à la contre-valorisation. Elles ne remplacent pas la source de prix institutionnelle du valorisateur. Une réutilisation automatisée à titre professionnel des données de bourse peut nécessiter une licence.",
+c_h:"Fonds monétaires en euros : paysage concurrentiel",
+c_sub:"Deux familles de concurrents : les fonds monétaires classiques en euros, dont les parts sont centralisées chez un dépositaire central (Euroclear France pour les fonds français, Clearstream ou Euroclear Bank pour les fonds irlandais et luxembourgeois), et les fonds monétaires tokenisés, dont les parts circulent sur une blockchain. Encours du fonds entier sauf mention contraire, à la date indiquée par la source.",
+cc_h:"Fonds classiques : encours par fonds",
+cc_sub:"Fonds monétaires en euros en circuit classique (centralisation chez un dépositaire central), en milliards d'euros. Les fonds tokenisés figurent plus bas, leur taille étant sans commune mesure.",
+c_type:"Type de fonds",
+ct_h:"Fonds classiques : détail",ct_sub:"Cliquer sur un en-tête pour trier. « Détails » ouvre la note de recherche sur le fonds.",
+tk_h:"Fonds monétaires tokenisés",
+tk_sub:"Les concurrents directs du projet : fonds monétaires ou produits de bons du Trésor dont les parts circulent sur une blockchain. Encours en millions, dans la devise du produit."
+},
+en:{
+eyebrow:"Stealth AM · independent price check",
+h1:"Short-term sovereign rates monitor: France, Germany, Italy, Spain",
+intro:"ISIN-level prices and official curves to check IB executions. Data are updated every business day and every snapshot is kept for history.",
+tab_rates:"Rates and issuance",tab_comp:"Competition",
+tiles_h:"Around one year, by country",
+tiles_sub:"Yield of the line closest to 12 months in the latest snapshot (France: 1-year constant maturity rate), and change since the previous snapshot.",
+curve_h:"Short-term yield curve",
+curve_sub:"Yield in % by residual maturity, up to 15 months. Solid dots: ISIN-level market prices. Hollow dots: auction rates. Pick a date to overlay a past curve as a dashed line.",
+cmp_label:"Compare with snapshot of",
+hist_h:"1-year and 2-year yield history",
+hist_sub:"Germany: Bundesbank official curve (Svensson method). France: constant maturity rates (TEC) published by Banque de France. Italy and Spain: point closest to 12 months in each recorded snapshot.",
+cal_h:"Sovereign issuance calendar",
+cal_sub:"Upcoming auctions of the four issuers. Short-term bills (BTF, Bubills, BOT, Letras) are the dates that matter for the money market fund. Dates marked “indicative” are still to be confirmed by the issuer. The histogram counts auctions per week.",
+cal_short:"Short-term bills only",
+table_h:"Line-by-line detail",
+table_sub:"Latest snapshot for each country; Italian yields computed here from the last price.",
+tool_h:"Execution check",
+tool_sub:"Enter the price obtained at IB on a German or Italian line: the gap with the latest reference price is shown in basis points.",
+tool_line:"Line",tool_px:"Execution price (clean)",tool_side:"Side",buy:"Buy",sell:"Sell",
+tool_note:"Indicative thresholds, to be calibrated in the broker selection policy: beyond 3 bp adverse, documented review; beyond 10 bp, escalation to the compliance officer (RCCI). The reference price has its own date: a gap may reflect market moves since then.",
+src_h:"Sources and limitations",
+src_list:`<li><a href="https://www.bundesbank.de/en/service/federal-securities/prices-and-yields" target="_blank" rel="noopener">Bundesbank, prices and yields of listed Federal securities</a>: ISIN-level reference price fixed around noon in Frankfurt. The monthly file can only be read automatically for the first days of the month; later on, the ISIN snapshot may be a few days old.</li>
+<li><a href="https://api.statistiken.bundesbank.de/rest/data/BBSIS/D.I.ZST.ZI.EUR.S1311.B.A604.R02XX.R.A.A._Z._Z.A?startPeriod=2026-04-01" target="_blank" rel="noopener">Bundesbank, term structure of Federal securities (Svensson)</a>: official daily 1-year and 2-year values.</li>
+<li><a href="https://webstat.banque-france.fr/fr/catalogue/fm/FM.D.FR.EUR.FR2.BB.FRMOYTEC1.HSTA" target="_blank" rel="noopener">Banque de France (Webstat), 1-year and 2-year constant maturity rates</a>: official daily values. Webstat publishes no BTF rates below one year; the French curve below one year remains an auction benchmark.</li>
+<li><a href="https://www.borsaitaliana.it/borsa/obbligazioni/mot/bot/lista.html" target="_blank" rel="noopener">Borsa Italiana, BOT list on MOT</a>: last price, retail market, delayed data.</li>
+<li><a href="https://dettedelafrance.fr/actualites/btf-la-france-leve-6-991-milliards-d-euros-en-dette-court-terme" target="_blank" rel="noopener">BTF auction of 14 September 2026</a>: secondary source, BTF benchmark.</li>
+<li><a href="https://www.bolsamania.com/noticias_amp/economia/tesoro-coloca-62155-millones-letras-eleva-interes-12-meses--23181738.html" target="_blank" rel="noopener">Letras auction of 4 August 2026</a>: secondary source, marginal rates, pending access to the Tesoro or Banco de España.</li>`,
+src_note:"These data are for plausibility checks and independent price verification. They do not replace the valuation agent's institutional pricing source. Automated professional reuse of exchange data may require a licence.",
+c_h:"Euro money market funds: competitive landscape",
+c_sub:"Two families of competitors: classic euro money market funds, whose units are held at a central securities depository (Euroclear France for French funds, Clearstream or Euroclear Bank for Irish and Luxembourg funds), and tokenized money market funds, whose units circulate on a blockchain. Whole-fund AUM unless stated otherwise, at the date given by the source.",
+cc_h:"Classic funds: AUM by fund",
+cc_sub:"Euro money market funds in the classic circuit (held at a central securities depository), in € billions. Tokenized funds are shown further down, as they are far smaller.",
+c_type:"Fund type",
+ct_h:"Classic funds: detail",ct_sub:"Click a header to sort. “Details” opens the research note on the fund.",
+tk_h:"Tokenized money market funds",
+tk_sub:"The project's direct competitors: money market funds or T-bill products whose units circulate on a blockchain. AUM in millions, in the product's currency."
+}};
+// textes dynamiques
+const D={
+fr:{loading:"Chargement des données…",noData:"Aucun relevé enregistré pour l'instant. La mise à jour quotidienne remplira cette page.",
+lastRun:(d,h,n)=>`Dernière mise à jour automatique : ${d} à ${h} UTC${n?" · "+n:""}`,nSnaps:n=>`${n} relevés enregistrés`,
+noAccess:"Données indisponibles pour le moment.",readFail:"Données indisponibles pour le moment (hors ligne ?). Recharger la page pour réessayer.",
+emptyTiles:"Les niveaux par pays apparaîtront ici dès le premier relevé enregistré.",
+upToDate:"À jour",staleN:n=>`Relevé de ${n} jours`,auctionRef:"Repère d'adjudication",oldAuction:"Ancien, à rafraîchir",
+since:(d,dt)=>`${d} pb depuis le ${dt}`,months:"mois",oneY:"1 an",at:"au",
+tecSrc:"Banque de France, taux de l'échéance constante",
+noCmp:"Aucune comparaison",emptyCurve:"La courbe s'affichera après le premier relevé.",resMat:"durée résiduelle",yieldPct:"rendement %",
+mo:"m",dShort:"j",snapOf:d=>`Relevé du ${d}`,
+deSv1:"Allemagne 1 an (Svensson)",deSv2:"Allemagne 2 ans (Svensson)",frT1:"France 1 an (TEC)",frT2:"France 2 ans (TEC)",
+approx1y:(c,src)=>`${c} ≈ 1 an (${src})`,motSnaps:"relevés MOT",auctions:"adjudications",
+emptyHist:"L'historique se construira au fil des relevés quotidiens.",noPeriod:"Aucun relevé sur cette période.",
+ranges:[["1M","1 mois"],["3M","3 mois"],["6M","6 mois"],["1A","1 an"]],
+monthsShort:["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."],
+emptyTable:"Le détail par ligne apparaîtra après le premier relevé.",
+th:{isin:"ISIN",line:"Ligne",mat:"Échéance",days:"Jours",price:"Prix",yld:"Rendement",title:"Titre",dur:"Durée (jours)",rate:"Taux"},
+tnote:(src,d,n,k)=>`${src} · relevé du ${d}${n?" · "+n:""} · ${k} relevé(s) en historique.`,
+noRef:"Aucune ligne de référence disponible pour l'instant.",refAt:d=>`Prix de référence au ${d}`,enterPx:"Saisir un prix d'exécution pour calculer l'écart.",
+pxGap:"Écart de prix",adverse:"Écart défavorable en rendement",verdict:"Verdict",bp:"pb",
+v3:"Escalade RCCI",v2:"Analyse à documenter",v1:"Conforme",
+calViews:[["list","Liste"],["hist","Histogramme"]],horizons:[[14,"2 semaines"],[31,"1 mois"],[92,"3 mois"]],
+emptyCal:"Le calendrier s'affichera dès qu'il aura été enregistré.",noEv:"Aucune adjudication sur cette période avec ces filtres.",
+weekOf:d=>`Semaine du ${d}`,shortTag:"Court terme",indicTag:"Indicatif",
+weekdays:["dim.","lun.","mar.","mer.","jeu.","ven.","sam."],
+calNote:(c,src,d,n)=>`${c} : ${src}, relevé du ${d}. ${n}`,nAuctions:"adjudications",weekShort:"semaine commençant le",
+cats:{europe:"Gestionnaires européens",international:"Gestionnaires internationaux"},
+emptyComp:"La liste des fonds concurrents apparaîtra ici dès qu'elle aura été enregistrée.",
+tEu:"Fonds classiques, gestionnaires européens",tUs:"Fonds classiques, gestionnaires internationaux",nFunds:n=>`${n} fonds recensés`,
+tTok:"Fonds tokenisés en euros",nTok:(a,b)=>`${a} produits en euros, ${b} au total`,
+tMed:"Rendement médian des fonds en euros",medRange:(n,a,b)=>`${n} fonds, de ${a} à ${b}`,
+tBig:"Plus gros fonds",tMkt:"Marché des fonds monétaires en euros",
+allTypes:"Tous les types",noAum:"Aucun encours disponible pour ces filtres.",share:"part",
+cth:{manager:"Gestionnaire",fund:"Fonds",type:"Type",domicile:"Domicile",isin:"ISIN",aum_bn_eur:"Encours",aum_date:"Date",yield_pct:"Rendement",src:"Source"},
+tth:{manager:"Gestionnaire",fund:"Produit",token:"Jeton",cur:"Devise",aum:"Encours",date:"Date",yld:"Rendement",src:"Source"},
+link:"lien",details:"Détails",na:"n. d.",noTok:"Aucun produit tokenisé enregistré.",
+mkt:(n,u)=>`Marché : ${n} <a href="${u}" target="_blank" rel="noopener">source</a>.`,
+listNote:d=>`Liste relevée le ${d}. Les encours proviennent des fiches des gestionnaires ou de bases publiques ; ils ne sont pas tous à la même date. « n. d. » : donnée non trouvée dans une source datée. Les rendements ne sont pas tous mesurés de la même façon (7 jours, 30 jours, 1 mois annualisé, brut ou net) : le type est indiqué sous chaque valeur.`,
+bn:"Md€",m:"M"},
+en:{loading:"Loading data…",noData:"No snapshot recorded yet. The daily update will fill this page.",
+lastRun:(d,h,n)=>`Last automatic update: ${d} at ${h} UTC${n?" · "+n:""}`,nSnaps:n=>`${n} snapshots recorded`,
+noAccess:"Data unavailable for now.",readFail:"Data unavailable for now (offline?). Reload the page to try again.",
+emptyTiles:"Country levels will appear here after the first recorded snapshot.",
+upToDate:"Up to date",staleN:n=>`${n} days old`,auctionRef:"Auction benchmark",oldAuction:"Old, to refresh",
+since:(d,dt)=>`${d} bp since ${dt}`,months:"months",oneY:"1 year",at:"as of",
+tecSrc:"Banque de France, constant maturity rate",
+noCmp:"No comparison",emptyCurve:"The curve will appear after the first snapshot.",resMat:"residual maturity",yieldPct:"yield %",
+mo:"m",dShort:"d",snapOf:d=>`Snapshot of ${d}`,
+deSv1:"Germany 1 year (Svensson)",deSv2:"Germany 2 years (Svensson)",frT1:"France 1 year (TEC)",frT2:"France 2 years (TEC)",
+approx1y:(c,src)=>`${c} ≈ 1 year (${src})`,motSnaps:"MOT snapshots",auctions:"auctions",
+emptyHist:"History will build up with daily snapshots.",noPeriod:"No snapshot over this period.",
+ranges:[["1M","1 month"],["3M","3 months"],["6M","6 months"],["1A","1 year"]],
+monthsShort:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+emptyTable:"Line-by-line detail will appear after the first snapshot.",
+th:{isin:"ISIN",line:"Line",mat:"Maturity",days:"Days",price:"Price",yld:"Yield",title:"Security",dur:"Term (days)",rate:"Rate"},
+tnote:(src,d,n,k)=>`${src} · snapshot of ${d}${n?" · "+n:""} · ${k} snapshot(s) in history.`,
+noRef:"No reference line available yet.",refAt:d=>`Reference price as of ${d}`,enterPx:"Enter an execution price to compute the gap.",
+pxGap:"Price gap",adverse:"Adverse yield gap",verdict:"Verdict",bp:"bp",
+v3:"Escalate to compliance",v2:"Review to document",v1:"Within tolerance",
+calViews:[["list","List"],["hist","Histogram"]],horizons:[[14,"2 weeks"],[31,"1 month"],[92,"3 months"]],
+emptyCal:"The calendar will appear once it has been recorded.",noEv:"No auction over this period with these filters.",
+weekOf:d=>`Week of ${d}`,shortTag:"Short-term",indicTag:"Indicative",
+weekdays:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+calNote:(c,src,d,n)=>`${c}: ${src}, captured ${d}. ${n}`,nAuctions:"auctions",weekShort:"week starting",
+cats:{europe:"European managers",international:"International managers"},
+emptyComp:"The list of competing funds will appear here once recorded.",
+tEu:"Classic funds, European managers",tUs:"Classic funds, international managers",nFunds:n=>`${n} funds tracked`,
+tTok:"Tokenized euro funds",nTok:(a,b)=>`${a} euro products, ${b} in total`,
+tMed:"Median yield of euro funds",medRange:(n,a,b)=>`${n} funds, from ${a} to ${b}`,
+tBig:"Largest fund",tMkt:"Euro money market fund market",
+allTypes:"All types",noAum:"No AUM available for these filters.",share:"share class",
+cth:{manager:"Manager",fund:"Fund",type:"Type",domicile:"Domicile",isin:"ISIN",aum_bn_eur:"AUM",aum_date:"Date",yield_pct:"Yield",src:"Source"},
+tth:{manager:"Manager",fund:"Product",token:"Token",cur:"Currency",aum:"AUM",date:"Date",yld:"Yield",src:"Source"},
+link:"link",details:"Details",na:"n/a",noTok:"No tokenized product recorded.",
+mkt:(n,u)=>`Market: ${n} <a href="${u}" target="_blank" rel="noopener">source</a>.`,
+listNote:d=>`List captured on ${d}. AUM figures come from managers' factsheets or public databases and are not all at the same date. “n/a”: not found in a dated source. Yields are not all measured the same way (7-day, 30-day, 1-month annualised, gross or net): the type is shown under each value.`,
+bn:"€bn",m:"m"}};
+const t=k=>D[LANG][k];
+const CN={fr:{FR:"France",DE:"Allemagne",IT:"Italie",ES:"Espagne"},en:{FR:"France",DE:"Germany",IT:"Italy",ES:"Spain"}};
+const C={FR:{color:"--fr"},DE:{color:"--de"},IT:{color:"--it"},ES:{color:"--es"}};
+const cn=k=>CN[LANG][k];
+// traductions des libellés de données connus (sources des relevés)
+const TRD={"Bundesbank, prix de référence":"Bundesbank, reference prices","Borsa Italiana (MOT), dernier cours":"Borsa Italiana (MOT), last price",
+"Adjudication BTF (source secondaire)":"BTF auction (secondary source)","Adjudication Letras (source secondaire)":"Letras auction (secondary source)",
+"relevé à 9 h 55, peut inclure des cours de la veille":"captured at 9:55 am, may include previous-day prices","relevé après la clôture de 17 h 30":"captured after the 5:30 pm close",
+"taux moyens pondérés":"weighted average rates","taux marginaux":"marginal rates"};
+const tr=s=>LANG==="en"&&s&&TRD[s]?TRD[s]:(s||"");
+const pick=(o,k)=>LANG==="en"&&o&&o[k+"_en"]?o[k+"_en"]:(o?o[k]:"");
+
+// ---------- Utilitaires ----------
+const ORDER=["FR","DE","IT","ES"];
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const day=s=>new Date(s+"T00:00:00Z");
+const todayISO=()=>{const d=new Date();return new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())).toISOString().slice(0,10);};
+const addBD=(s,n)=>{const d=day(s);while(n>0){d.setUTCDate(d.getUTCDate()+1);const w=d.getUTCDay();if(w&&w<6)n--;}return d;};
+const days=(a,b)=>Math.round((b-a)/864e5);
+const fmtD=s=>s?s.split("-").reverse().join("/"):"";
+const fmtAD=s=>!s?"":s.length===7?s.slice(5)+"/"+s.slice(0,4):fmtD(s);
+const dec=(v,d)=>LANG==="fr"?v.toFixed(d).replace(".",","):v.toFixed(d);
+const pct=v=>LANG==="fr"?dec(v,2)+" %":dec(v,2)+"%";
+const nfr=(v,d=3)=>dec(v,d);
+const loc=()=>LANG==="fr"?"fr-FR":"en-GB";
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const signed=v=>(v>=0?"+":"")+dec(v,1);
+
+let SNAPS=[], SERIES={}, META=null, RANGE="6M", TAB="DE", DBSTATE="loading";
+
+function prep(s){
+  const lines=(s.lines||[]).map(l=>{
+    const o={...l};
+    if(s.kind==="isin"){
+      o.days=days(addBD(s.date,2),day(l.maturity));
+      if(typeof l.yield!=="number" && typeof l.price==="number" && o.days>0) o.yield=(100/l.price-1)*360/o.days*100;
+    }
+    return o;
+  }).filter(l=>typeof l.yield==="number"&&isFinite(l.yield));
+  return {...s,lines};
+}
+const pts=s=>s.lines.filter(l=>l.days>3).map(l=>({x:l.days,y:l.yield,id:l.isin||l.label}));
+const near1y=s=>{const p=pts(s);return p.length?p.reduce((a,b)=>Math.abs(b.x-365)<Math.abs(a.x-365)?b:a):null;};
+function byCountry(){const m={};for(const s of SNAPS){(m[s.country]=m[s.country]||[]).push(s);}for(const k in m)m[k].sort((a,b)=>a.date<b.date?-1:1);return m;}
+function status(s){const n=days(day(s.date),day(todayISO()));if(s.kind==="auction")return n>20?["bad",t("oldAuction")]:["warn",t("auctionRef")];return n>5?["warn",t("staleN")(n)]:["ok",t("upToDate")];}
+const empty=msg=>`<div class="empty">${msg}</div>`;
+
+// ---------- Vue taux ----------
+function renderRun(){
+  const el=document.getElementById("run");
+  if(DBSTATE!=="ok"){el.textContent=t(DBSTATE==="loading"?"loading":DBSTATE);return;}
+  if(!SNAPS.length){el.textContent=t("noData");return;}
+  const note=META?(LANG==="en"&&META.note_en?META.note_en:META.note):"";
+  el.textContent=META?.lastRun?t("lastRun")(fmtD(META.lastRun.slice(0,10)),META.lastRun.slice(11,16),note):t("nSnaps")(SNAPS.length);
+}
+function deltaHtml(d,dt){return `<div class="delta" style="color:var(${d>0.5?'--bad':d<-0.5?'--ok':'--muted'})">${t("since")(signed(d),dt)}</div>`;}
+function renderTiles(){
+  const m=byCountry(), el=document.getElementById("tiles");
+  if(!SNAPS.length){el.innerHTML=empty(t("emptyTiles"));return;}
+  el.innerHTML="";
+  for(const k of ORDER){
+    const tec=k==="FR"?SERIES["FR-tec"]?.tenors?.["1Y"]:null;
+    const tile=document.createElement("div");tile.className="tile";tile.style.setProperty("--c",`var(${C[k].color})`);
+    if(tec?.length){
+      const L=tec[tec.length-1], P=tec.length>1?tec[tec.length-2]:null;
+      const n=days(day(L[0]),day(todayISO())), st=n>5?["warn",t("staleN")(n)]:["ok",t("upToDate")];
+      tile.innerHTML=`<div class="ctry">${cn(k)}<span class="chip ${st[0]}">${st[1]}</span></div>
+        <div class="big">${pct(L[1])}<small>${t("oneY")}</small></div>${P?deltaHtml((L[1]-P[1])*100,fmtD(P[0])):""}
+        <div class="meta">${t("tecSrc")} · ${t("at")} ${fmtD(L[0])}</div>`;
+      el.appendChild(tile); continue;
+    }
+    const arr=m[k]; if(!arr) continue;
+    const s=arr[arr.length-1], p=near1y(s); if(!p) continue;
+    const prev=arr.length>1?near1y(arr[arr.length-2]):null;
+    const [cls,txt]=status(s);
+    tile.innerHTML=`<div class="ctry">${cn(k)}<span class="chip ${cls}">${txt}</span></div>
+      <div class="big">${pct(p.y)}<small>${Math.round(p.x/30.4)} ${t("months")}</small></div>${prev?deltaHtml((p.y-prev.y)*100,fmtD(arr[arr.length-2].date)):""}
+      <div class="meta">${esc(tr(s.source))} · ${t("at")} ${fmtD(s.date)}</div>`;
+    el.appendChild(tile);
+  }
+}
+function fillCompare(){
+  const sel=document.getElementById("cmp"), cur=sel.value;
+  const latest={}; for(const [k,a] of Object.entries(byCountry())) latest[k]=a[a.length-1].date;
+  const dates=[...new Set(SNAPS.filter(s=>s.kind==="isin"&&s.date<latest[s.country]).map(s=>s.date))].sort().reverse();
+  sel.innerHTML=`<option value="">${t("noCmp")}</option>`+dates.map(d=>`<option value="${d}">${fmtD(d)}</option>`).join("");
+  sel.value=dates.includes(cur)?cur:"";
+}
+function yTicks(ymin,ymax,step,X0,X1,Y){let s="";for(let v=Math.ceil(ymin/step-1e-9)*step;v<=ymax+1e-9;v+=step){s+=`<line x1="${X0}" x2="${X1}" y1="${Y(v)}" y2="${Y(v)}" stroke="${css('--line')}"/><text x="${X0-8}" y="${Y(v)+4}" text-anchor="end">${dec(v,2)}</text>`;}return s;}
+function drawCurve(){
+  const host=document.getElementById("chart");
+  if(!SNAPS.length){host.innerHTML=empty(t("emptyCurve"));document.getElementById("legend").innerHTML="";return;}
+  const m=byCountry(), cmp=document.getElementById("cmp").value;
+  const W=900,H=360,mg={l:52,r:20,t:16,b:40},xmax=460;
+  const series=[];
+  for(const k of ["DE","IT","FR","ES"]){const a=m[k];if(!a)continue;series.push({k,s:a[a.length-1],past:false});
+    if(cmp){const p=a.filter(s=>s.kind==="isin"&&s.date<=cmp).pop();if(p&&p!==a[a.length-1])series.push({k,s:p,past:true});}}
+  const all=series.flatMap(o=>pts(o.s).filter(p=>p.x<=xmax));
+  if(!all.length){host.innerHTML="";return;}
+  const ymin=Math.floor(Math.min(...all.map(p=>p.y))*4)/4-.25, ymax=Math.ceil(Math.max(...all.map(p=>p.y))*4)/4+.25;
+  const X=v=>mg.l+v/xmax*(W-mg.l-mg.r), Y=v=>H-mg.b-(v-ymin)/(ymax-ymin)*(H-mg.t-mg.b);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:560px" role="img" aria-label="${esc(S[LANG].curve_h)}">`+yTicks(ymin,ymax,.25,mg.l,W-mg.r,Y);
+  for(const mo of [0,3,6,9,12,15]) s+=`<text x="${X(mo*30.4)}" y="${H-mg.b+18}" text-anchor="middle">${mo} ${t("mo")}</text>`;
+  s+=`<text x="${(W+mg.l)/2}" y="${H-6}" text-anchor="middle">${t("resMat")}</text><text x="14" y="${(H-mg.b)/2}" transform="rotate(-90 14 ${(H-mg.b)/2})" text-anchor="middle">${t("yieldPct")}</text>`;
+  for(const o of series){
+    const col=css(C[o.k].color), ps=pts(o.s).filter(p=>p.x<=xmax).sort((a,b)=>a.x-b.x), isin=o.s.kind==="isin";
+    if(ps.length>1) s+=`<polyline fill="none" stroke="${col}" stroke-width="${o.past?1.5:2}" opacity="${o.past?.6:1}" ${(!isin||o.past)?'stroke-dasharray="5 4"':''} points="${ps.map(p=>X(p.x)+','+Y(p.y)).join(' ')}"/>`;
+    if(!o.past) for(const p of ps) s+=`<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="${isin?3.5:5}" fill="${isin?col:css('--surface')}" stroke="${col}" stroke-width="2"><title>${cn(o.k)} · ${esc(p.id)} · ${p.x} ${t("dShort")} · ${pct(p.y)} · ${fmtD(o.s.date)}</title></circle>`;
+  }
+  host.innerHTML=s+"</svg>";
+  document.getElementById("legend").innerHTML=series.filter(o=>!o.past).map(o=>`<span><i class="${o.s.kind==='auction'?'dot':''}" style="border-color:var(${C[o.k].color})"></i>${cn(o.k)} · ${fmtD(o.s.date)}</span>`).join("")+(cmp?`<span><i class="dash" style="border-color:var(--muted)"></i>${t("snapOf")(fmtD(cmp))}</span>`:"");
+}
+function drawHist(){
+  const host=document.getElementById("hist");
+  const lines=[], dots=[];
+  const sv=SERIES["DE-svensson"]?.tenors||{}, tec=SERIES["FR-tec"]?.tenors||{};
+  if(sv["1Y"]?.length) lines.push({k:"DE",label:t("deSv1"),data:sv["1Y"],dash:false});
+  if(sv["2Y"]?.length) lines.push({k:"DE",label:t("deSv2"),data:sv["2Y"],dash:true});
+  if(tec["1Y"]?.length) lines.push({k:"FR",label:t("frT1"),data:tec["1Y"],dash:false});
+  if(tec["2Y"]?.length) lines.push({k:"FR",label:t("frT2"),data:tec["2Y"],dash:true});
+  const m=byCountry();
+  for(const k of ["IT","FR","ES"].filter(k=>!(k==="FR"&&tec["1Y"]?.length))){const a=m[k];if(!a)continue;const d=a.map(s=>{const p=near1y(s);return p?[s.date,p.y]:null;}).filter(Boolean);if(d.length)(d.length>1&&k==="IT"?lines:dots).push({k,label:t("approx1y")(cn(k),k==="IT"?t("motSnaps"):t("auctions")),data:d,dash:false});}
+  if(!lines.length&&!dots.length){host.innerHTML=empty(t("emptyHist"));document.getElementById("hlegend").innerHTML="";return;}
+  const end=todayISO(), back={"1M":31,"3M":92,"6M":183,"1A":366}[RANGE];
+  const start=new Date(day(end)-back*864e5).toISOString().slice(0,10);
+  const inR=d=>d.filter(p=>p[0]>=start&&p[0]<=end);
+  const allY=[...lines,...dots].flatMap(o=>inR(o.data).map(p=>p[1]));
+  if(!allY.length){host.innerHTML=empty(t("noPeriod"));return;}
+  const W=900,H=320,mg={l:52,r:20,t:16,b:36};
+  const ymin=Math.floor(Math.min(...allY)*4)/4-.1, ymax=Math.ceil(Math.max(...allY)*4)/4+.1;
+  const t0=day(start),t1=day(end);
+  const X=d=>mg.l+(day(d)-t0)/(t1-t0)*(W-mg.l-mg.r), Y=v=>H-mg.b-(v-ymin)/(ymax-ymin)*(H-mg.t-mg.b);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:560px" role="img" aria-label="${esc(S[LANG].hist_h)}">`+yTicks(ymin,ymax,(ymax-ymin)>1.2?.5:.25,mg.l,W-mg.r,Y);
+  const d=new Date(t0);d.setUTCDate(1);d.setUTCMonth(d.getUTCMonth()+1);
+  const ticks=[];while(d<=t1){ticks.push(d.toISOString().slice(0,10));d.setUTCMonth(d.getUTCMonth()+(back>200?2:1));}
+  if(back<=31){ticks.length=0;const w=new Date(t0);while(w<=t1){if(w.getUTCDay()===1)ticks.push(w.toISOString().slice(0,10));w.setUTCDate(w.getUTCDate()+1);}}
+  for(const tk of ticks){const lab=back<=31?fmtD(tk).slice(0,5):t("monthsShort")[day(tk).getUTCMonth()];s+=`<line x1="${X(tk)}" x2="${X(tk)}" y1="${H-mg.b}" y2="${H-mg.b+4}" stroke="${css('--muted')}"/><text x="${X(tk)}" y="${H-mg.b+18}" text-anchor="middle">${lab}</text>`;}
+  for(const o of lines){const p=inR(o.data);if(!p.length)continue;const col=css(C[o.k].color);
+    s+=`<polyline fill="none" stroke="${col}" stroke-width="${o.dash?1.6:2.2}" ${o.dash?'stroke-dasharray="6 4"':''} points="${p.map(q=>X(q[0])+','+Y(q[1])).join(' ')}"/>`;
+    const L=p[p.length-1];s+=`<circle cx="${X(L[0])}" cy="${Y(L[1])}" r="3.5" fill="${col}"><title>${esc(o.label)} · ${fmtD(L[0])} · ${pct(L[1])}</title></circle>`;}
+  for(const o of dots){const col=css(C[o.k].color);for(const q of inR(o.data))s+=`<circle cx="${X(q[0])}" cy="${Y(q[1])}" r="5" fill="${css('--surface')}" stroke="${col}" stroke-width="2"><title>${esc(o.label)} · ${fmtD(q[0])} · ${pct(q[1])}</title></circle>`;}
+  host.innerHTML=s+"</svg>";
+  document.getElementById("hlegend").innerHTML=[...lines.map(o=>`<span><i class="${o.dash?'dash':''}" style="border-color:var(${C[o.k].color})"></i>${esc(o.label)}</span>`),...dots.map(o=>`<span><i class="dot" style="border-color:var(${C[o.k].color})"></i>${esc(o.label)}</span>`)].join("");
+}
+function renderTable(){
+  const m=byCountry(), tabs=document.getElementById("tabs");
+  const ks=["DE","IT","FR","ES"].filter(k=>m[k]);
+  if(!ks.length){tabs.innerHTML="";document.getElementById("table").innerHTML=empty(t("emptyTable"));document.getElementById("tnote").textContent="";return;}
+  if(!ks.includes(TAB))TAB=ks[0];
+  tabs.innerHTML=ks.map(k=>`<button type="button" role="tab" data-k="${k}" aria-selected="${k===TAB}">${cn(k)}</button>`).join("");
+  const s=m[TAB][m[TAB].length-1], h=t("th"); let html;
+  if(s.kind==="isin") html=`<table><thead><tr><th>${h.isin}</th><th>${h.line}</th><th>${h.mat}</th><th class="r">${h.days}</th><th class="r">${h.price}</th><th class="r">${h.yld}</th></tr></thead><tbody>`+
+    s.lines.slice().sort((a,b)=>a.days-b.days).map(l=>`<tr><td class="num">${esc(l.isin)}</td><td>${esc(l.label)}</td><td class="num">${fmtD(l.maturity)}</td><td class="r num">${l.days}</td><td class="r num">${typeof l.price==="number"?nfr(l.price):""}</td><td class="r num">${pct(l.yield)}</td></tr>`).join("")+"</tbody></table>";
+  else html=`<table><thead><tr><th>${h.title}</th><th class="r">${h.dur}</th><th class="r">${h.rate}</th></tr></thead><tbody>`+s.lines.map(l=>`<tr><td>${esc(l.label)}</td><td class="r num">${l.days}</td><td class="r num">${pct(l.yield)}</td></tr>`).join("")+"</tbody></table>";
+  document.getElementById("table").innerHTML=html;
+  document.getElementById("tnote").textContent=t("tnote")(tr(s.source),fmtD(s.date),tr(s.note),m[TAB].length);
+}
+document.getElementById("tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(b){TAB=b.dataset.k;renderTable();}});
+
+const sel=document.getElementById("isin"), px=document.getElementById("px"), side=document.getElementById("side");
+let firstTool=true;
+function fillTool(){
+  const m=byCountry(), cur=sel.value; sel.innerHTML="";
+  for(const k of ["DE","IT"]){const a=m[k];if(!a)continue;const s=a[a.length-1];for(const l of s.lines.filter(l=>l.days>3&&typeof l.price==="number")){const o=document.createElement("option");o.value=k+"|"+l.isin;o.textContent=`${l.isin} · ${l.label}`;sel.appendChild(o);}}
+  if([...sel.options].some(o=>o.value===cur))sel.value=cur;
+  if(firstTool&&sel.options.length){firstTool=false;const o=[...sel.options].find(o=>o.value.startsWith("DE"))||sel.options[0];sel.value=o.value;const l=lineFor(o.value);if(l)px.value=nfr(l.price+0.03);}
+  evalTrade();
+}
+function lineFor(v){if(!v)return null;const [k,isin]=v.split("|");const a=byCountry()[k];if(!a)return null;const s=a[a.length-1];const l=s.lines.find(x=>x.isin===isin);return l?{...l,date:s.date}:null;}
+function evalTrade(){
+  const out=document.getElementById("result"), l=lineFor(sel.value);
+  if(!l){out.innerHTML=`<div><span>${t("noRef")}</span></div>`;return;}
+  const ref=l.price, p=parseFloat((px.value||"").replace(",","."));
+  if(!isFinite(p)||p<50||p>150){out.innerHTML=`<div><span>${t("refAt")(fmtD(l.date))}</span><b>${nfr(ref)}</b></div><div><span>${t("enterPx")}</span></div>`;return;}
+  const yrs=Math.max(l.days,1)/365, dpx=p-ref, bp=-dpx/ref/yrs*1e4, adverse=side.value==="buy"?-bp:bp;
+  const sev=adverse>10?"--bad":adverse>3?"--warn":"--ok", verdict=adverse>10?t("v3"):adverse>3?t("v2"):t("v1");
+  out.innerHTML=`<div><span>${t("refAt")(fmtD(l.date))}</span><b>${nfr(ref)}</b></div><div><span>${t("pxGap")}</span><b>${(dpx>=0?"+":"")+nfr(dpx)}</b></div>
+   <div style="--sev:var(${sev})"><span>${t("adverse")}</span><b>${dec(Math.max(adverse,0),1)} ${t("bp")}</b></div>
+   <div style="--sev:var(${sev})"><span>${t("verdict")}</span><b style="color:var(${sev})">${verdict}</b></div>`;
+}
+sel.addEventListener("change",evalTrade);px.addEventListener("input",evalTrade);side.addEventListener("change",evalTrade);
+document.getElementById("tool").addEventListener("submit",e=>e.preventDefault());
+document.getElementById("cmp").addEventListener("change",drawCurve);
+
+const rangeEl=document.getElementById("range");
+function buildRange(){rangeEl.innerHTML=t("ranges").map(([v,x])=>`<button type="button" data-r="${v}" aria-pressed="${v===RANGE}">${x}</button>`).join("");}
+rangeEl.addEventListener("click",e=>{const b=e.target.closest("button[data-r]");if(!b)return;RANGE=b.dataset.r;[...rangeEl.children].forEach(x=>x.setAttribute("aria-pressed",x===b));drawHist();});
+
+// ---------- Calendrier ----------
+let CAL={}, CALC=new Set(ORDER), CALH=31, CALV="list";
+try{const v=localStorage.getItem("calv");if(v==="list"||v==="hist")CALV=v;}catch(e){}
+const monday=s=>{const d=day(s);const w=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-w);return d.toISOString().slice(0,10);};
+const calc=document.getElementById("calc"), calh=document.getElementById("calh"), calv=document.getElementById("calv");
+function buildCalControls(){
+  calv.innerHTML=t("calViews").map(([v,x])=>`<button type="button" data-v="${v}" aria-pressed="${v===CALV}">${x}</button>`).join("");
+  calc.innerHTML=ORDER.map(k=>`<button type="button" data-k="${k}" aria-pressed="${CALC.has(k)}">${cn(k)}</button>`).join("");
+  calh.innerHTML=t("horizons").map(([v,x])=>`<button type="button" data-h="${v}" aria-pressed="${v===CALH}">${x}</button>`).join("");
+}
+calv.addEventListener("click",e=>{const b=e.target.closest("button[data-v]");if(!b)return;CALV=b.dataset.v;try{localStorage.setItem("calv",CALV)}catch(err){}[...calv.children].forEach(x=>x.setAttribute("aria-pressed",x===b));renderCal();});
+calc.addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(!b)return;const k=b.dataset.k;if(CALC.has(k)&&CALC.size===1)return;CALC.has(k)?CALC.delete(k):CALC.add(k);b.setAttribute("aria-pressed",CALC.has(k));renderCal();});
+calh.addEventListener("click",e=>{const b=e.target.closest("button[data-h]");if(!b)return;CALH=+b.dataset.h;[...calh.children].forEach(x=>x.setAttribute("aria-pressed",x===b));renderCal();});
+document.getElementById("calshort").addEventListener("change",renderCal);
+function calEvents(){
+  const tday=todayISO(), end=new Date(day(tday).getTime()+CALH*864e5).toISOString().slice(0,10), shortOnly=document.getElementById("calshort").checked;
+  return Object.values(CAL).filter(d=>CALC.has(d.country)).flatMap(d=>(d.events||[]).map(e=>({...e,country:d.country})))
+    .filter(e=>e.date>=tday&&e.date<=end&&(!shortOnly||e.short)).sort((a,b)=>a.date===b.date?ORDER.indexOf(a.country)-ORDER.indexOf(b.country):a.date<b.date?-1:1);
+}
+function renderCal(){
+  const host=document.getElementById("cal"), note=document.getElementById("calnote"), lg=document.getElementById("callegend");
+  const docs=Object.values(CAL);
+  if(!docs.length){host.innerHTML=empty(t("emptyCal"));note.textContent="";lg.innerHTML="";return;}
+  const ev=calEvents(), tday=todayISO();
+  lg.innerHTML="";
+  if(!ev.length){host.innerHTML=empty(t("noEv"));}
+  else if(CALV==="list"){
+    let h="",wk="";
+    for(const e of ev){const w=monday(e.date);if(w!==wk){wk=w;h+=`<div class="week">${t("weekOf")(fmtD(w))}</div>`;}
+      const tags=[e.short?`<span class="chip ok">${t("shortTag")}</span>`:"",e.indicative?`<span class="chip warn">${t("indicTag")}</span>`:""].join("");
+      h+=`<div class="ev${e.date===tday?' today':''}"><div class="d">${t("weekdays")[day(e.date).getUTCDay()]} ${fmtD(e.date).slice(0,5)}</div>
+        <div class="c" style="--c:var(${C[e.country].color})"><i></i>${cn(e.country)}</div>
+        <div class="t"><b>${esc(pick(e,"instrument"))}</b><span>${esc(pick(e,"detail"))}${e.isin?` · <span class="num" style="display:inline">${esc(e.isin)}</span>`:""}</span></div>
+        <div><div class="v">${esc(LANG==="en"&&e.volume?e.volume.replace(" Md€"," €bn").replace(",","."):e.volume||"")}</div><div class="tags">${tags}</div></div></div>`;}
+    host.innerHTML=h;
+  } else {
+    // histogramme : adjudications par semaine, empilées par pays
+    const weeks=[];let w=day(monday(tday));const endW=day(monday(new Date(day(tday).getTime()+CALH*864e5).toISOString().slice(0,10)));
+    while(w<=endW){weeks.push(w.toISOString().slice(0,10));w=new Date(w.getTime()+7*864e5);}
+    const cnt={};for(const e of ev){const k=monday(e.date);cnt[k]=cnt[k]||{};cnt[k][e.country]=(cnt[k][e.country]||0)+1;}
+    const ks=ORDER.filter(k=>CALC.has(k));
+    const max=Math.max(1,...weeks.map(x=>ks.reduce((s,k)=>s+((cnt[x]||{})[k]||0),0)));
+    const W=900,H=300,mg={l:40,r:16,t:20,b:44},bw=(W-mg.l-mg.r)/weeks.length;
+    const step=max>12?4:max>6?2:1, ym=Math.ceil(max/step)*step;
+    const Y=v=>H-mg.b-v/ym*(H-mg.t-mg.b);
+    let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:520px" role="img" aria-label="${esc(S[LANG].cal_h)}">`;
+    for(let v=0;v<=ym;v+=step)s+=`<line x1="${mg.l}" x2="${W-mg.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="${css('--line')}"/><text x="${mg.l-8}" y="${Y(v)+4}" text-anchor="end">${v}</text>`;
+    weeks.forEach((wk,i)=>{let acc=0;const bwi=Math.min(bw*0.64,56), x=mg.l+i*bw+(bw-bwi)/2, c=cnt[wk]||{};
+      const tot=ks.reduce((s2,k)=>s2+(c[k]||0),0);
+      for(const k of ks){const n=c[k]||0;if(!n)continue;const y0=Y(acc),y1=Y(acc+n);
+        const names=ev.filter(e=>monday(e.date)===wk&&e.country===k).map(e=>`${fmtD(e.date).slice(0,5)} ${pick(e,"instrument")}`).join(", ");
+        s+=`<rect x="${x}" y="${y1}" width="${bwi}" height="${Math.max(y0-y1-1,1)}" fill="${css(C[k].color)}"><title>${cn(k)} · ${n} · ${esc(names)}</title></rect>`;acc+=n;}
+      if(tot)s+=`<text x="${x+bwi/2}" y="${Y(tot)-6}" text-anchor="middle" style="fill:${css('--ink')}">${tot}</text>`;
+      const lab=fmtD(wk).slice(0,5);
+      if(weeks.length<=14||i%2===0)s+=`<text x="${x+bwi/2}" y="${H-mg.b+16}" text-anchor="middle">${lab}</text>`;});
+    s+=`<text x="${(W+mg.l)/2}" y="${H-8}" text-anchor="middle">${t("weekShort")}</text>`;
+    host.innerHTML=`<div class="chart">${s}</svg></div>`;
+    lg.innerHTML=ks.map(k=>`<span><i class="sq" style="--c:var(${C[k].color})"></i>${cn(k)}</span>`).join("")+`<span>${t("nAuctions")} / ${LANG==="fr"?"semaine":"week"}</span>`;
+  }
+  note.innerHTML=docs.filter(d=>CALC.has(d.country)).sort((a,b)=>ORDER.indexOf(a.country)-ORDER.indexOf(b.country)).map(d=>t("calNote")(cn(d.country),`<a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(pick(d,"source"))}</a>`,fmtD(d.updated),esc(pick(d,"note"))) ).join("<br>");
+}
+
+// ---------- Vues ----------
+const VIEWS={taux:["t-taux","v-taux"],concurrence:["t-comp","v-comp"]};
+let VIEW="taux";
+function showView(v){VIEW=v;for(const [k,[tb,p]] of Object.entries(VIEWS)){const on=k===v;document.getElementById(tb).setAttribute("aria-selected",on);document.getElementById(p).hidden=!on;}if(v==="taux")requestAnimationFrame(()=>{drawCurve();drawHist();renderCal();});else renderComp();}
+document.getElementById("t-taux").addEventListener("click",()=>{showView("taux");try{history.replaceState(null,"","#taux")}catch(e){}});
+document.getElementById("t-comp").addEventListener("click",()=>{showView("concurrence");try{history.replaceState(null,"","#concurrence")}catch(e){}});
+
+// ---------- Concurrence ----------
+let COMP={}, CCAT=new Set(["europe","international"]), CSORT={k:"aum_bn_eur",dir:-1};
+const CATC={europe:"--fr",international:"--de"};
+const ccat=document.getElementById("ccat");
+function buildComp(){ccat.innerHTML=Object.keys(CATC).map(k=>`<button type="button" data-c="${k}" aria-pressed="${CCAT.has(k)}">${t("cats")[k]}</button>`).join("");}
+ccat.addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(!b)return;const k=b.dataset.c;if(CCAT.has(k)&&CCAT.size===1)return;CCAT.has(k)?CCAT.delete(k):CCAT.add(k);b.setAttribute("aria-pressed",CCAT.has(k));renderComp();});
+document.getElementById("ctype").addEventListener("change",renderComp);
+const bn=v=>typeof v==="number"?(LANG==="fr"?v.toLocaleString("fr-FR",{maximumFractionDigits:v<10?1:0})+" Md€":"€"+v.toLocaleString("en-GB",{maximumFractionDigits:v<10?1:0})+"bn"):t("na");
+const mm=(v,c)=>{if(typeof v!=="number")return t("na");const n=v.toLocaleString(loc(),{maximumFractionDigits:v<100?1:0});const sym=c==="EUR"?"€":c==="USD"?"$":"";return LANG==="fr"?n+" M"+(sym||" "+(c||"")):(sym?sym+n+"m":n+"m "+(c||""));};
+const yld=f=>typeof f.yield_pct==="number"?`<td class="r yc"><span class="num">${pct(f.yield_pct)}</span><span class="sm">${esc(pick(f,"yield_type"))}${f.yield_date?" · "+fmtAD(f.yield_date):""}${f.yield_share?" · "+esc(f.yield_share):""}</span></td>`:`<td class="r">${t("na")}</td>`;
+const det=f=>{const n=pick(f,"note");return n?`<details><summary>${t("details")}</summary><p>${esc(n)}</p></details>`:"";};
+function compFunds(){return ["europe","international"].flatMap(c=>(COMP[c]?.funds||[]).map(f=>({...f,cat:c})));}
+function renderComp(){
+  if(VIEW!=="concurrence")return;
+  const all=compFunds(), tok=COMP.tokenized?.funds||[];
+  const tiles=document.getElementById("ctiles");
+  if(!all.length&&!tok.length){tiles.innerHTML=empty(t("emptyComp"));["cchart","ctable","ttable"].forEach(id=>document.getElementById(id).innerHTML="");document.getElementById("mnote").innerHTML="";return;}
+  const sum=a=>a.reduce((s,f)=>s+(typeof f.aum_bn_eur==="number"&&f.aum_scope!=="part"?f.aum_bn_eur:0),0);
+  const eu=all.filter(f=>f.cat==="europe"), us=all.filter(f=>f.cat==="international");
+  const tokE=tok.filter(f=>f.currency==="EUR"), tokEur=tokE.filter(f=>typeof f.aum_m==="number").reduce((s,f)=>s+f.aum_m,0);
+  const big=all.filter(f=>typeof f.aum_bn_eur==="number").sort((a,b)=>b.aum_bn_eur-a.aum_bn_eur)[0];
+  const mk=COMP.market;
+  const tile=(c,ti,v,m)=>`<div class="tile" style="--c:var(${c})"><div class="ctry">${ti}</div><div class="big">${v}</div><div class="meta">${m}</div></div>`;
+  const ys=all.filter(f=>typeof f.yield_pct==="number").map(f=>f.yield_pct).sort((a,b)=>a-b);
+  const med=ys.length?(ys.length%2?ys[(ys.length-1)/2]:(ys[ys.length/2-1]+ys[ys.length/2])/2):null;
+  tiles.innerHTML=[
+    tile("--fr",t("tEu"),bn(sum(eu)),t("nFunds")(eu.length)),
+    tile("--de",t("tUs"),bn(sum(us)),t("nFunds")(us.length)),
+    tile("--it",t("tTok"),mm(tokEur,"EUR"),t("nTok")(tokE.length,tok.length)),
+    med!==null?tile("--es",t("tMed"),pct(med),t("medRange")(ys.length,pct(ys[0]),pct(ys[ys.length-1]))):"",
+    big?tile("--accent",t("tBig"),bn(big.aum_bn_eur),esc(big.fund)+" · "+esc(big.manager)):"",
+    mk&&typeof mk.total_bn_eur==="number"?tile("--muted",t("tMkt"),bn(mk.total_bn_eur),`${esc(pick(mk,"scope"))} · ${fmtAD(mk.date)}`):""
+  ].join("");
+  const csel=document.getElementById("ctype"), cur=csel.value, types=[...new Set(all.map(f=>f.type).filter(Boolean))].sort();
+  csel.innerHTML=`<option value="">${t("allTypes")}</option>`+types.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");if(types.includes(cur))csel.value=cur;
+  const rows=all.filter(f=>CCAT.has(f.cat)&&(!csel.value||f.type===csel.value));
+  // barres horizontales
+  const bars=rows.filter(f=>typeof f.aum_bn_eur==="number").sort((a,b)=>b.aum_bn_eur-a.aum_bn_eur).slice(0,25);
+  const host=document.getElementById("cchart");
+  if(!bars.length){host.innerHTML=empty(t("noAum"));}
+  else{
+    const W=900,rowH=24,lw=330,H=bars.length*rowH+30,max=Math.max(...bars.map(f=>f.aum_bn_eur));
+    const step=max>150?50:max>60?20:max>25?10:5, xm=Math.ceil(max/step)*step, X=v=>lw+v/xm*(W-lw-70);
+    let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:600px" role="img" aria-label="${esc(S[LANG].cc_h)}">`;
+    for(let v=0;v<=xm;v+=step)s+=`<line x1="${X(v)}" x2="${X(v)}" y1="0" y2="${H-22}" stroke="${css('--line')}"/><text x="${X(v)}" y="${H-6}" text-anchor="middle">${v}</text>`;
+    bars.forEach((f,i)=>{const y=i*rowH+4,col=css(CATC[f.cat]);const lab=f.manager+" · "+f.fund;const short=lab.length>48?lab.slice(0,46)+"…":lab;
+      s+=`<text x="${lw-8}" y="${y+14}" text-anchor="end" style="fill:${css('--ink')}">${esc(short)}<title>${esc(lab)}</title></text>`;
+      s+=`<rect x="${lw}" y="${y+3}" width="${Math.max(X(f.aum_bn_eur)-lw,1)}" height="${rowH-8}" rx="2" fill="${col}" ${f.aum_scope==="part"?'opacity=".45"':''}><title>${esc(lab)} · ${bn(f.aum_bn_eur)} · ${fmtAD(f.aum_date)}</title></rect>`;
+      s+=`<text x="${X(f.aum_bn_eur)+6}" y="${y+14}">${f.aum_bn_eur.toLocaleString(loc(),{maximumFractionDigits:1})}${f.aum_scope==="part"?" ("+t("share")+")":""}</text>`;});
+    host.innerHTML=s+"</svg>";
+  }
+  // tableau des fonds classiques
+  const H=t("cth"), cols=["manager","fund","type","domicile","isin","aum_bn_eur","aum_date","yield_pct"];
+  const sorted=rows.slice().sort((a,b)=>{const k=CSORT.k,x=a[k],y=b[k];if(x==null)return 1;if(y==null)return -1;return (typeof x==="number"?x-y:String(x).localeCompare(String(y),loc()))*CSORT.dir;});
+  document.getElementById("ctable").innerHTML=`<table><thead><tr>${cols.map(k=>`<th class="sort${k==="aum_bn_eur"||k==="yield_pct"?" r":""}" data-k="${k}" ${CSORT.k===k?`aria-sort="${CSORT.dir>0?"ascending":"descending"}"`:""}>${H[k]}</th>`).join("")}<th>${H.src}</th></tr></thead><tbody>`+
+    sorted.map(f=>`<tr><td><span class="cat" style="--c:var(${CATC[f.cat]})"><i></i>${esc(f.manager)}</span></td><td class="txt">${esc(f.fund)}${det(f)}</td><td>${esc(pick(f,"type"))}</td><td>${esc(f.domicile)}</td><td class="num">${esc(f.isin)}</td><td class="r num">${bn(f.aum_bn_eur)}${f.aum_scope==="part"?`<span class="sm">${t("share")}</span>`:""}</td><td class="num">${fmtAD(f.aum_date)}</td>${yld(f)}<td>${f.source_url?`<a href="${esc(f.source_url)}" target="_blank" rel="noopener">${t("link")}</a>`:""}</td></tr>`).join("")+"</tbody></table>";
+  // tableau des fonds tokenisés : structure et blockchains sous le nom du produit
+  const TH=t("tth"), tk=tok.slice().sort((a,b)=>(a.currency==="EUR"?0:1)-(b.currency==="EUR"?0:1)||((b.aum_m??-1)-(a.aum_m??-1)));
+  document.getElementById("ttable").innerHTML=tk.length?`<table><thead><tr><th>${TH.manager}</th><th>${TH.fund}</th><th>${TH.token}</th><th>${TH.cur}</th><th class="r">${TH.aum}</th><th>${TH.date}</th><th class="r">${TH.yld}</th><th>${TH.src}</th></tr></thead><tbody>`+
+    tk.map(f=>{const ch=Array.isArray(f.chains)?f.chains.join(", "):(f.chains||"");const dom=pick(f,"domicile");
+      return `<tr><td class="txt">${esc(f.manager)}</td><td class="txt"><b style="font-weight:600">${esc(f.fund)}</b>${dom||ch?`<span class="sm">${esc(dom)}${dom&&ch?" · ":""}${esc(ch)}</span>`:""}${det(f)}</td><td class="num">${esc(f.token||"")}</td><td>${f.currency==="EUR"?`<span class="chip ok">EUR</span>`:esc(f.currency||"")}</td><td class="r num">${mm(f.aum_m,f.currency)}</td><td class="num">${fmtAD(f.aum_date)}</td>${yld(f)}<td>${f.source_url?`<a href="${esc(f.source_url)}" target="_blank" rel="noopener">${t("link")}</a>`:""}</td></tr>`;}).join("")+"</tbody></table>":empty(t("noTok"));
+  document.getElementById("mnote").innerHTML=[mk?t("mkt")(esc(pick(mk,"note")),esc(mk.source_url)):"",t("listNote")(fmtD(COMP.europe?.updated||COMP.tokenized?.updated||""))].filter(Boolean).join("<br>");
+}
+document.getElementById("ctable").addEventListener("click",e=>{const th=e.target.closest("th.sort");if(!th)return;const k=th.dataset.k;CSORT=CSORT.k===k?{k,dir:-CSORT.dir}:{k,dir:(k==="aum_bn_eur"||k==="yield_pct")?-1:1};renderComp();});
+
+// ---------- Langue : application ----------
+function applyLang(){
+  document.documentElement.lang=LANG;
+  document.querySelectorAll("[data-i]").forEach(el=>{const v=S[LANG][el.dataset.i];if(v!=null)el.innerHTML=v;});
+  [...document.getElementById("lang").children].forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===LANG));
+  buildRange();buildCalControls();buildComp();renderAll();renderComp();
+}
+document.getElementById("lang").addEventListener("click",e=>{const b=e.target.closest("button[data-l]");if(!b||b.dataset.l===LANG)return;LANG=b.dataset.l;try{localStorage.setItem("lang",LANG)}catch(err){}applyLang();});
+
+function renderAll(){renderRun();renderTiles();fillCompare();drawCurve();drawHist();renderTable();fillTool();renderCal();}
+applyLang();
+if(location.hash==="#concurrence")showView("concurrence");
+window.addEventListener("hashchange",()=>showView(location.hash==="#concurrence"?"concurrence":"taux"));
+const redraw=()=>{drawCurve();drawHist();renderCal();renderComp();};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",redraw);
+new MutationObserver(redraw).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+// ---------- Données : fichiers JSON publiés avec l'application ----------
+async function loadJSON(n){const r=await fetch(`data/${n}.json?t=${Date.now()}`,{cache:"no-store"});if(!r.ok)throw new Error(n+" "+r.status);return r.json();}
+async function loadAll(){
+  try{
+    const [snaps,series,comp,cal,status]=await Promise.all(["snapshots","series","competitors","calendar","status"].map(loadJSON));
+    DBSTATE="ok";
+    SNAPS=Object.values(snaps).map(prep).filter(s=>s.country&&s.date&&s.lines.length);
+    SERIES=series;COMP=comp;CAL={};for(const [k,v] of Object.entries(cal))if(v&&v.country)CAL[k]=v;META=status;
+    renderAll();renderComp();
+  }catch(e){DBSTATE="readFail";renderRun();console.error(e);}
+}
+loadAll();
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadAll();});
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));}
+</script>
+</body>
+</html>
