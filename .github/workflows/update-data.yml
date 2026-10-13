@@ -1,0 +1,40 @@
+name: Mise à jour des données
+
+on:
+  schedule:
+    # Du lundi au vendredi à 16 h 05 UTC, soit 18 h 05 à Paris en été et 17 h 05 en hiver,
+    # après la clôture du MOT (17 h 30) et la publication des prix de la Bundesbank.
+    - cron: "5 16 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r scripts/requirements.txt
+      - name: Collecte des sources
+        env:
+          WEBSTAT_API_KEY: ${{ secrets.WEBSTAT_API_KEY }}
+        run: python scripts/update_data.py
+      - name: Enregistrement des nouvelles données
+        run: |
+          git config user.name "suivi-taux-bot"
+          git config user.email "suivi-taux-bot@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "Aucune donnée nouvelle."
+          else
+            git commit -m "Données du $(TZ=Europe/Paris date +%d/%m/%Y)"
+            git push
+          fi
