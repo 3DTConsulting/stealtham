@@ -360,25 +360,25 @@
     "isin": "IT0005684888",
     "label": "BOT déc. 2026",
     "maturity": "2026-12-14",
-    "price": 99.601
+    "price": 99.604
    },
    {
     "isin": "IT0005719536",
     "label": "BOT déc. 2026 (S)",
     "maturity": "2026-12-31",
-    "price": 99.438
+    "price": 99.435
    },
    {
     "isin": "IT0005689887",
     "label": "BOT janv. 2027",
     "maturity": "2027-01-14",
-    "price": 99.341
+    "price": 99.349
    },
    {
     "isin": "IT0005725236",
     "label": "BOT janv. 2027 (S)",
     "maturity": "2027-01-29",
-    "price": 99.19
+    "price": 99.197
    },
    {
     "isin": "IT0005695256",
@@ -390,7 +390,7 @@
     "isin": "IT0005699340",
     "label": "BOT mars 2027",
     "maturity": "2027-03-12",
-    "price": 98.88
+    "price": 98.89
    },
    {
     "isin": "IT0005733115",
@@ -402,13 +402,13 @@
     "isin": "IT0005704447",
     "label": "BOT avr. 2027",
     "maturity": "2027-04-14",
-    "price": 98.57
+    "price": 98.571
    },
    {
     "isin": "IT0005709289",
     "label": "BOT mai 2027",
     "maturity": "2027-05-14",
-    "price": 98.31
+    "price": 98.314
    },
    {
     "isin": "IT0005716714",
@@ -420,25 +420,25 @@
     "isin": "IT0005722514",
     "label": "BOT juil. 2027",
     "maturity": "2027-07-14",
-    "price": 97.751
+    "price": 97.753
    },
    {
     "isin": "IT0005729220",
     "label": "BOT août 2027",
     "maturity": "2027-08-13",
-    "price": 97.454
+    "price": 97.456
    },
    {
     "isin": "IT0005730681",
     "label": "BOT sept. 2027",
     "maturity": "2027-09-14",
-    "price": 97.221
+    "price": 97.218
    },
    {
     "isin": "IT0005735094",
     "label": "BOT oct. 2027",
     "maturity": "2027-10-14",
-    "price": 96.873
+    "price": 96.87
    }
   ]
  },

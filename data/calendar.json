@@ -7,282 +7,272 @@
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
    {
-    "date": "2026-10-13",
-    "instrument": "Bobl",
-    "detail": "réouverture, échéance 08/10/2031",
-    "volume": "5,0 Md€",
-    "short": false,
-    "isin": "DE000BU25075",
-    "instrument_en": "Bobl",
-    "detail_en": "reopening, maturity 08/10/2031"
-   },
-   {
     "date": "2026-10-14",
     "instrument": "Bund",
-    "detail": "réouverture, échéance 15/08/2056",
-    "volume": "1,5 Md€",
+    "instrument_en": "Bund",
+    "detail": "réouverture, coupon 2,90 %, échéance 15/08/2056",
+    "detail_en": "reopening, 2.90% coupon, maturity 15/08/2056",
     "short": false,
     "isin": "DE000BU2D012",
-    "instrument_en": "Bund",
-    "detail_en": "reopening, maturity 15/08/2056"
+    "volume": "1,5 Md€"
    },
    {
     "date": "2026-10-14",
     "instrument": "Bund",
-    "detail": "réouverture, échéance 15/05/2047",
-    "volume": "1,0 Md€",
+    "instrument_en": "Bund",
+    "detail": "réouverture, coupon 3,40 %, échéance 15/05/2047",
+    "detail_en": "reopening, 3.40% coupon, maturity 15/05/2047",
     "short": false,
     "isin": "DE000BU2T000",
-    "instrument_en": "Bund",
-    "detail_en": "reopening, maturity 15/05/2047"
+    "volume": "1,0 Md€"
    },
    {
     "date": "2026-10-19",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 17/03/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "reopening, maturity 17/03/2027",
     "short": true,
     "isin": "DE000BU0E394",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 17/03/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-10-19",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 15/09/2027",
-    "volume": "2,0 Md€",
+    "detail_en": "reopening, maturity 15/09/2027",
     "short": true,
     "isin": "DE000BU0E451",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 15/09/2027"
+    "volume": "2,0 Md€"
    },
    {
     "date": "2026-10-27",
     "instrument": "Schatz",
-    "detail": "réouverture, échéance 13/12/2028",
-    "volume": "5,0 Md€",
+    "instrument_en": "Schatz",
+    "detail": "réouverture, coupon 3,00 %, échéance 13/12/2028",
+    "detail_en": "reopening, 3.00% coupon, maturity 13/12/2028",
     "short": false,
     "isin": "DE000BU22155",
-    "instrument_en": "Schatz",
-    "detail_en": "reopening, maturity 13/12/2028"
+    "volume": "5,0 Md€"
    },
    {
     "date": "2026-10-28",
     "instrument": "Bund",
-    "detail": "réouverture, échéance 15/08/2036",
-    "volume": "5,5 Md€",
+    "instrument_en": "Bund",
+    "detail": "réouverture, coupon 3,00 %, échéance 15/08/2036",
+    "detail_en": "reopening, 3.00% coupon, maturity 15/08/2036",
     "short": false,
     "isin": "DE000BU2Z072",
-    "instrument_en": "Bund",
-    "detail_en": "reopening, maturity 15/08/2036"
+    "volume": "5,5 Md€"
    },
    {
     "date": "2026-11-02",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 17/02/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "reopening, maturity 17/02/2027",
     "short": true,
     "isin": "DE000BU0E386",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 17/02/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-02",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 18/08/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "reopening, maturity 18/08/2027",
     "short": true,
     "isin": "DE000BU0E444",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 18/08/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-03",
     "instrument": "Bobl",
-    "detail": "réouverture, échéance 08/10/2031",
-    "volume": "5,0 Md€",
+    "instrument_en": "Bobl",
+    "detail": "réouverture, coupon 2,90 %, échéance 08/10/2031",
+    "detail_en": "reopening, 2.90% coupon, maturity 08/10/2031",
     "short": false,
     "isin": "DE000BU25075",
-    "instrument_en": "Bobl",
-    "detail_en": "reopening, maturity 08/10/2031"
+    "volume": "5,0 Md€"
    },
    {
     "date": "2026-11-04",
     "instrument": "Bund 15 ans",
-    "detail": "réouverture, ligne précisée ultérieurement",
-    "volume": "1,0 Md€",
-    "short": false,
     "instrument_en": "15-year Bund",
-    "detail_en": "reopening, line to be specified"
+    "detail": "réouverture, ligne précisée ultérieurement",
+    "detail_en": "reopening, line to be specified",
+    "short": false,
+    "volume": "1,0 Md€"
    },
    {
     "date": "2026-11-04",
     "instrument": "Bund",
-    "detail": "réouverture, échéance 15/05/2041",
-    "volume": "1,0 Md€",
+    "instrument_en": "Bund",
+    "detail": "réouverture, coupon 2,60 %, échéance 15/05/2041",
+    "detail_en": "reopening, 2.60% coupon, maturity 15/05/2041",
     "short": false,
     "isin": "DE000BU2F009",
-    "instrument_en": "Bund",
-    "detail_en": "reopening, maturity 15/05/2041"
+    "volume": "1,0 Md€"
    },
    {
     "date": "2026-11-09",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 14/04/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "reopening, maturity 14/04/2027",
     "short": true,
     "isin": "DE000BU0E402",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 14/04/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-09",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 12/10/2027",
-    "volume": "2,0 Md€",
+    "detail_en": "reopening, maturity 12/10/2027",
     "short": true,
     "isin": "DE000BU0E469",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 12/10/2027"
+    "volume": "2,0 Md€"
    },
    {
     "date": "2026-11-11",
     "instrument": "Bund 30 ans",
-    "detail": "réouverture, ligne précisée ultérieurement",
-    "volume": "1,0 Md€",
-    "short": false,
     "instrument_en": "30-year Bund",
-    "detail_en": "reopening, line to be specified"
+    "detail": "réouverture, ligne précisée ultérieurement",
+    "detail_en": "reopening, line to be specified",
+    "short": false,
+    "volume": "1,0 Md€"
    },
    {
     "date": "2026-11-11",
     "instrument": "Bund",
-    "detail": "réouverture, échéance 15/08/2056",
-    "volume": "1,5 Md€",
+    "instrument_en": "Bund",
+    "detail": "réouverture, coupon 2,90 %, échéance 15/08/2056",
+    "detail_en": "reopening, 2.90% coupon, maturity 15/08/2056",
     "short": false,
     "isin": "DE000BU2D012",
-    "instrument_en": "Bund",
-    "detail_en": "reopening, maturity 15/08/2056"
+    "volume": "1,5 Md€"
    },
    {
     "date": "2026-11-16",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 12/05/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "reopening, maturity 12/05/2027",
     "short": true,
     "isin": "DE000BU0E410",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 12/05/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-16",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "nouvelle ligne, échéance 16/11/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "new line, maturity 16/11/2027",
     "short": true,
     "isin": "DE000BU0E477",
-    "instrument_en": "Bubill",
-    "detail_en": "new line, maturity 16/11/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-17",
     "instrument": "Schatz",
-    "detail": "réouverture, échéance 13/12/2028",
-    "volume": "5,0 Md€",
+    "instrument_en": "Schatz",
+    "detail": "réouverture, coupon 3,00 %, échéance 13/12/2028",
+    "detail_en": "reopening, 3.00% coupon, maturity 13/12/2028",
     "short": false,
     "isin": "DE000BU22155",
-    "instrument_en": "Schatz",
-    "detail_en": "reopening, maturity 13/12/2028"
+    "volume": "5,0 Md€"
    },
    {
     "date": "2026-11-18",
     "instrument": "Bund",
-    "detail": "réouverture, échéance 15/11/2033",
-    "volume": "3,0 Md€",
+    "instrument_en": "Bund",
+    "detail": "réouverture, coupon 3,30 %, échéance 15/11/2033",
+    "detail_en": "reopening, 3.30% coupon, maturity 15/11/2033",
     "short": false,
     "isin": "DE000BU27022",
-    "instrument_en": "Bund",
-    "detail_en": "reopening, maturity 15/11/2033"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-23",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 17/03/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "reopening, maturity 17/03/2027",
     "short": true,
     "isin": "DE000BU0E394",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 17/03/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-23",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 15/09/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "reopening, maturity 15/09/2027",
     "short": true,
     "isin": "DE000BU0E451",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 15/09/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-25",
     "instrument": "Bund",
-    "detail": "réouverture, échéance 15/08/2036",
-    "volume": "5,0 Md€",
+    "instrument_en": "Bund",
+    "detail": "réouverture, coupon 3,00 %, échéance 15/08/2036",
+    "detail_en": "reopening, 3.00% coupon, maturity 15/08/2036",
     "short": false,
     "isin": "DE000BU2Z072",
-    "instrument_en": "Bund",
-    "detail_en": "reopening, maturity 15/08/2036"
+    "volume": "5,0 Md€"
    },
    {
     "date": "2026-11-30",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 12/05/2027",
-    "volume": "3,0 Md€",
+    "detail_en": "reopening, maturity 12/05/2027",
     "short": true,
     "isin": "DE000BU0E410",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 12/05/2027"
+    "volume": "3,0 Md€"
    },
    {
     "date": "2026-11-30",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 16/11/2027",
-    "volume": "2,0 Md€",
+    "detail_en": "reopening, maturity 16/11/2027",
     "short": true,
     "isin": "DE000BU0E477",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 16/11/2027"
+    "volume": "2,0 Md€"
    },
    {
     "date": "2026-12-01",
     "instrument": "Bobl",
-    "detail": "réouverture, échéance 08/10/2031",
-    "volume": "4,5 Md€",
+    "instrument_en": "Bobl",
+    "detail": "réouverture, coupon 2,90 %, échéance 08/10/2031",
+    "detail_en": "reopening, 2.90% coupon, maturity 08/10/2031",
     "short": false,
     "isin": "DE000BU25075",
-    "instrument_en": "Bobl",
-    "detail_en": "reopening, maturity 08/10/2031"
+    "volume": "4,5 Md€"
    },
    {
     "date": "2026-12-07",
     "instrument": "Bubill",
+    "instrument_en": "Bubill",
     "detail": "réouverture, échéance 16/06/2027",
-    "volume": "2,0 Md€",
+    "detail_en": "reopening, maturity 16/06/2027",
     "short": true,
     "isin": "DE000BU0E428",
-    "instrument_en": "Bubill",
-    "detail_en": "reopening, maturity 16/06/2027"
+    "volume": "2,0 Md€"
    },
    {
     "date": "2026-12-08",
     "instrument": "Schatz",
-    "detail": "réouverture, échéance 13/12/2028",
-    "volume": "4,0 Md€",
+    "instrument_en": "Schatz",
+    "detail": "réouverture, coupon 3,00 %, échéance 13/12/2028",
+    "detail_en": "reopening, 3.00% coupon, maturity 13/12/2028",
     "short": false,
     "isin": "DE000BU22155",
-    "instrument_en": "Schatz",
-    "detail_en": "reopening, maturity 13/12/2028"
+    "volume": "4,0 Md€"
    }
   ],
   "source_en": "Finanzagentur, issuance calendar",
@@ -291,144 +281,193 @@
  "FR": {
   "country": "FR",
   "updated": "2026-10-13",
-  "source": "AFT, calendrier indicatif 2026 (via source secondaire)",
+  "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
-  "note": "Dates BTF déduites du rythme hebdomadaire du lundi ; à confirmer sur aft.gouv.fr.",
+  "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
   "events": [
    {
     "date": "2026-10-19",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 21/10",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 21/10",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-10-26",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 28/10",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 28/10",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-11-02",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 04/11",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 04/11",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-11-09",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 12/11",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 12/11",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-11-16",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 18/11",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 18/11",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-11-23",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 25/11",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 25/11",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-11-30",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 02/12",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 02/12",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-12-07",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 09/12",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 09/12",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-12-14",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 16/12",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 16/12",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-12-21",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 23/12",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 23/12",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-12-28",
     "instrument": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le mercredi",
-    "short": true,
-    "indicative": true,
     "instrument_en": "BTF",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on Wednesday"
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 30/12",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 30/12",
+    "short": true,
+    "indicative": true
+   },
+   {
+    "date": "2027-01-04",
+    "instrument": "BTF",
+    "instrument_en": "BTF",
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 06/01",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 06/01",
+    "short": true,
+    "indicative": true
+   },
+   {
+    "date": "2027-01-11",
+    "instrument": "BTF",
+    "instrument_en": "BTF",
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 13/01",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 13/01",
+    "short": true,
+    "indicative": true
+   },
+   {
+    "date": "2027-01-18",
+    "instrument": "BTF",
+    "instrument_en": "BTF",
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 20/01",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 20/01",
+    "short": true,
+    "indicative": true
    },
    {
     "date": "2026-10-15",
     "instrument": "OAT moyen terme et indexées",
-    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 19/10",
-    "short": false,
     "instrument_en": "Medium-term and inflation-linked OATs",
-    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 19/10"
+    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 19/10",
+    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 19/10",
+    "short": false,
+    "indicative": true
    },
    {
     "date": "2026-11-05",
     "instrument": "OAT long terme",
-    "detail": "plus de 8,5 ans ; règlement le 09/11",
-    "short": false,
     "instrument_en": "Long-term OATs",
-    "detail_en": "over 8.5 years; settlement on 09/11"
+    "detail": "plus de 8,5 ans ; règlement le 09/11",
+    "detail_en": "over 8.5 years; settlement on 09/11",
+    "short": false,
+    "indicative": true
    },
    {
     "date": "2026-11-19",
     "instrument": "OAT moyen terme et indexées",
-    "detail": "règlement le 23/11",
-    "short": false,
     "instrument_en": "Medium-term and inflation-linked OATs",
-    "detail_en": "settlement on 23/11"
+    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 23/11",
+    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 23/11",
+    "short": false,
+    "indicative": true
    },
    {
     "date": "2026-12-03",
     "instrument": "OAT long terme",
-    "detail": "adjudication moyen terme et indexées optionnelle le même jour ; règlement le 07/12",
-    "short": false,
     "instrument_en": "Long-term OATs",
-    "detail_en": "optional medium-term and inflation-linked auction the same day; settlement on 07/12"
+    "detail": "plus de 8,5 ans ; règlement le 07/12",
+    "detail_en": "over 8.5 years; settlement on 07/12",
+    "short": false,
+    "indicative": true
+   },
+   {
+    "date": "2027-01-07",
+    "instrument": "OAT long terme",
+    "instrument_en": "Long-term OATs",
+    "detail": "plus de 8,5 ans ; règlement le 11/01",
+    "detail_en": "over 8.5 years; settlement on 11/01",
+    "short": false,
+    "indicative": true
+   },
+   {
+    "date": "2027-01-21",
+    "instrument": "OAT moyen terme et indexées",
+    "instrument_en": "Medium-term and inflation-linked OATs",
+    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 25/01",
+    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 25/01",
+    "short": false,
+    "indicative": true
    }
   ],
-  "source_en": "AFT, indicative 2026 calendar (via secondary source)",
-  "note_en": "BTF dates inferred from the weekly Monday pattern; to be confirmed on aft.gouv.fr."
+  "source_en": "AFT, indicative calendar rules",
+  "note_en": "Dates computed from the AFT's published pattern (BTF on Mondays, long-term OATs on the 1st Thursday, medium-term and inflation-linked on the 3rd Thursday); to be confirmed by AFT announcements."
  },
  "IT": {
   "country": "IT",
