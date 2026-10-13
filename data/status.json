@@ -1,6 +1,13 @@
 {
- "lastRun": "2026-10-13T08:10:00Z",
- "note": "relevé initial, repris de la page de suivi",
- "note_en": "initial snapshot, carried over from the tracking page",
- "sources": {}
+ "lastRun": "2026-10-13T14:41:40Z",
+ "note": "mis à jour : courbe DE 1 an, courbe DE 2 ans, TEC FR 1 an, TEC FR 2 ans, prix DE par ISIN, BOT italiens",
+ "note_en": "updated: DE curve 1y, DE curve 2y, FR TEC 1y, FR TEC 2y, DE ISIN prices, Italian BOT",
+ "sources": {
+  "bbk_1Y": "ok, dernière valeur 2026-10-13",
+  "bbk_2Y": "ok, dernière valeur 2026-10-13",
+  "tec_1Y": "ok, dernière valeur 2026-10-12",
+  "tec_2Y": "ok, dernière valeur 2026-10-12",
+  "bbk_isin": "ok, 13 lignes au 2026-10-13",
+  "bot": "ok, 16 BOT au 2026-10-13"
+ }
 }
