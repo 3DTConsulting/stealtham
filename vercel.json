@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/suivitaux", "destination": "https://claude.ai/artifact/RoZJmYex6tN8hPGYJHqR7H", "permanent": false },
+    { "source": "/suivitaux/concurrence", "destination": "https://claude.ai/artifact/RoZJmYex6tN8hPGYJHqR7H#concurrence", "permanent": false },
+    { "source": "/", "destination": "/suivitaux", "permanent": false }
+  ]
+}
