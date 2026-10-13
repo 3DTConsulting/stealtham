@@ -316,12 +316,148 @@ def update_bot(snaps: dict, log: dict) -> None:
         log["bot"] = f"échec : {e}"
 
 
+# ---------------------------------------------------------------- calendrier des émissions
+def easter(y: int) -> dt.date:
+    a, b, c = y % 19, y // 100, y % 100
+    d, e = b // 4, b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i, k = c // 4, c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    mo = (h + l - 7 * m + 114) // 31
+    return dt.date(y, mo, (h + l - 7 * m + 114) % 31 + 1)
+
+
+def fr_holidays(y: int) -> set:
+    e = easter(y)
+    fixed = [(1, 1), (5, 1), (5, 8), (7, 14), (8, 15), (11, 1), (11, 11), (12, 25)]
+    return {dt.date(y, m, d) for m, d in fixed} | {e + dt.timedelta(days=1), e + dt.timedelta(days=39), e + dt.timedelta(days=50)}
+
+
+def nth_weekday(y: int, m: int, wd: int, n: int) -> dt.date:
+    d = dt.date(y, m, 1)
+    d += dt.timedelta(days=(wd - d.weekday()) % 7)
+    return d + dt.timedelta(weeks=n - 1)
+
+
+def fr_fmt(d: dt.date) -> str:
+    return d.strftime("%d/%m")
+
+
+def next_business(d: dt.date, hol: set) -> dt.date:
+    while d.weekday() >= 5 or d in hol:
+        d += dt.timedelta(days=1)
+    return d
+
+
+def build_fr_calendar(start: dt.date, end: dt.date) -> list:
+    """Calendrier indicatif de l'AFT : BTF chaque lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi."""
+    hol = fr_holidays(start.year) | fr_holidays(end.year)
+    ev = []
+    d = start + dt.timedelta(days=(0 - start.weekday()) % 7)
+    while d <= end:
+        a = next_business(d, hol)
+        s = next_business(a + dt.timedelta(days=2), hol)
+        ev.append({"date": a.isoformat(), "instrument": "BTF", "instrument_en": "BTF",
+                   "detail": f"adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le {fr_fmt(s)}",
+                   "detail_en": f"weekly auction, lines and amounts announced the previous Thursday; settlement on {fr_fmt(s)}",
+                   "short": True, "indicative": True})
+        d += dt.timedelta(weeks=1)
+    y, m = start.year, start.month
+    while dt.date(y, m, 1) <= end:
+        lt = nth_weekday(y, m, 3, 1)
+        if m != 8:
+            st = next_business(lt + dt.timedelta(days=4), hol)
+            ev.append({"date": lt.isoformat(), "instrument": "OAT long terme", "instrument_en": "Long-term OATs",
+                       "detail": f"plus de 8,5 ans ; règlement le {fr_fmt(st)}", "detail_en": f"over 8.5 years; settlement on {fr_fmt(st)}",
+                       "short": False, "indicative": True})
+        if m not in (8, 12):
+            mt = nth_weekday(y, m, 3, 3)
+            st = next_business(mt + dt.timedelta(days=4), hol)
+            ev.append({"date": mt.isoformat(), "instrument": "OAT moyen terme et indexées", "instrument_en": "Medium-term and inflation-linked OATs",
+                       "detail": f"2 à 8,5 ans, OATi et OAT€i ; règlement le {fr_fmt(st)}", "detail_en": f"2 to 8.5 years, OATi and OAT€i; settlement on {fr_fmt(st)}",
+                       "short": False, "indicative": True})
+        m += 1
+        if m == 13:
+            y, m = y + 1, 1
+    return [e for e in ev if start.isoformat() <= e["date"] <= end.isoformat()]
+
+
+DE_INSTR = {"bubill": ("Bubill", "Bubill", True), "schatz": ("Schatz", "Schatz", False), "bobl": ("Bobl", "Bobl", False),
+            "bund": ("Bund", "Bund", False)}
+
+
+def parse_finanzagentur(html: str) -> list:
+    ev = []
+    for tr in re.findall(r"<tr\b.*?</tr>", html, flags=re.S | re.I):
+        txt = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", tr)).strip()
+        dates = re.findall(r"\b(\d{2}\.\d{2}\.\d{4})\b", txt)
+        m_ins = re.search(r"\b(Bubill|Schatz|Bobl|Bund|Green|Inflation[- ]linked)\b(?:\s*(\d{2})\s*Y)?", txt, flags=re.I)
+        if not dates or not m_ins:
+            continue
+        date = parse_date(dates[0])
+        kind = m_ins.group(1).lower()
+        name, name_en, short = DE_INSTR.get(kind, (m_ins.group(1), m_ins.group(1), False))
+        if m_ins.group(2):
+            name, name_en = f"Bund {int(m_ins.group(2))} ans", f"{int(m_ins.group(2))}-year Bund"
+        isin = re.search(r"\b(DE[0-9A-Z]{10})\b", txt)
+        new = re.search(r"\(\s*N\b|new issue", txt, flags=re.I) is not None
+        mat = parse_date(dates[1]) if len(dates) > 1 else None
+        vol = re.search(r"(\d+[.,]\d+)\s*(?:€|EUR)\s*bn", txt, flags=re.I) or re.search(r"(\d+[.,]\d+)\s*bn", txt, flags=re.I)
+        cpn = re.search(r"(\d+[.,]\d+)\s*%", txt)
+        det = ("nouvelle ligne" if new else "réouverture") + (f", coupon {cpn.group(1).replace('.', ',')} %" if cpn else "") + (f", échéance {fmt_fr_date(mat)}" if mat else ", ligne précisée ultérieurement")
+        det_en = ("new line" if new else "reopening") + (f", {cpn.group(1)}% coupon" if cpn else "") + (f", maturity {fmt_fr_date(mat)}" if mat else ", line to be specified")
+        e = {"date": date, "instrument": name, "instrument_en": name_en, "detail": det, "detail_en": det_en, "short": short}
+        if isin:
+            e["isin"] = isin.group(1)
+        if vol:
+            e["volume"] = vol.group(1).replace(".", ",") + " Md€"
+        if date:
+            ev.append(e)
+    uniq = {(e["date"], e["instrument"], e.get("isin", "")): e for e in ev}
+    return sorted(uniq.values(), key=lambda e: e["date"])
+
+
+def fmt_fr_date(iso: str) -> str:
+    y, m, d = iso.split("-")
+    return f"{d}/{m}/{y}"
+
+
+def update_calendar(cal: dict, log: dict) -> None:
+    today = today_paris()
+    t, end = today.isoformat(), (today + dt.timedelta(days=100)).isoformat()
+    # 1. retirer les adjudications passées, pour tous les pays
+    for doc in cal.values():
+        doc["events"] = [e for e in doc.get("events", []) if e.get("date", "") >= t]
+    # 2. Allemagne : calendrier de la Finanzagentur
+    try:
+        html = get("https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar").text
+        ev = [e for e in parse_finanzagentur(html) if t <= e["date"] <= end]
+        if len(ev) < 3:
+            raise ValueError(f"trop peu d'adjudications lues ({len(ev)})")
+        doc = cal.setdefault("DE", {"country": "DE", "source": "Finanzagentur, calendrier d'émission", "source_en": "Finanzagentur, issuance calendar",
+                                    "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar"})
+        doc["events"], doc["updated"] = ev, t
+        log["cal_DE"] = f"ok, {len(ev)} adjudications"
+    except Exception as e:  # noqa: BLE001
+        log["cal_DE"] = f"échec : {e}"
+    # 3. France : calendrier indicatif de l'AFT, recalculé chaque jour
+    doc = cal.setdefault("FR", {"country": "FR", "url": "https://www.aft.gouv.fr"})
+    doc["events"] = build_fr_calendar(today, dt.date.fromisoformat(end))
+    doc.update({"updated": t, "source": "AFT, règles du calendrier indicatif", "source_en": "AFT, indicative calendar rules",
+                "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
+                "note_en": "Dates computed from the AFT's published pattern (BTF on Mondays, long-term OATs on the 1st Thursday, medium-term and inflation-linked on the 3rd Thursday); to be confirmed by AFT announcements."})
+    log["cal_FR"] = f"ok, {len(doc['events'])} adjudications indicatives"
+
+
 # ---------------------------------------------------------------- principal
 def summarize(log: dict) -> tuple[str, str]:
     ok = [k for k, v in log.items() if v.startswith("ok")]
     ko = [k for k, v in log.items() if v.startswith("échec")]
-    names = {"bbk_1Y": "courbe DE 1 an", "bbk_2Y": "courbe DE 2 ans", "tec_1Y": "TEC FR 1 an", "tec_2Y": "TEC FR 2 ans", "bbk_isin": "prix DE par ISIN", "bot": "BOT italiens"}
-    names_en = {"bbk_1Y": "DE curve 1y", "bbk_2Y": "DE curve 2y", "tec_1Y": "FR TEC 1y", "tec_2Y": "FR TEC 2y", "bbk_isin": "DE ISIN prices", "bot": "Italian BOT"}
+    names = {"bbk_1Y": "courbe DE 1 an", "bbk_2Y": "courbe DE 2 ans", "tec_1Y": "TEC FR 1 an", "tec_2Y": "TEC FR 2 ans", "bbk_isin": "prix DE par ISIN", "bot": "BOT italiens", "cal_DE": "calendrier DE", "cal_FR": "calendrier FR"}
+    names_en = {"bbk_1Y": "DE curve 1y", "bbk_2Y": "DE curve 2y", "tec_1Y": "FR TEC 1y", "tec_2Y": "FR TEC 2y", "bbk_isin": "DE ISIN prices", "bot": "Italian BOT", "cal_DE": "DE calendar", "cal_FR": "FR calendar"}
     fr = ("mis à jour : " + ", ".join(names.get(k, k) for k in ok) if ok else "aucune donnée nouvelle") + (" ; échec : " + ", ".join(names.get(k, k) for k in ko) if ko else "")
     en = ("updated: " + ", ".join(names_en.get(k, k) for k in ok) if ok else "no new data") + ("; failed: " + ", ".join(names_en.get(k, k) for k in ko) if ko else "")
     return fr, en
@@ -329,12 +465,13 @@ def summarize(log: dict) -> tuple[str, str]:
 
 def main() -> int:
     dry = "--dry-run" in sys.argv
-    series, snaps = load("series.json"), load("snapshots.json")
+    series, snaps, cal = load("series.json"), load("snapshots.json"), load("calendar.json")
     log: dict[str, str] = {}
     update_bbk(series, log)
     update_tec(series, log)
     update_bbk_isin(snaps, log)
     update_bot(snaps, log)
+    update_calendar(cal, log)
     fr, en = summarize(log)
     status = {"lastRun": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "note": fr, "note_en": en, "sources": log}
     for k, v in log.items():
@@ -344,6 +481,7 @@ def main() -> int:
         return 0
     save("series.json", series)
     save("snapshots.json", snaps)
+    save("calendar.json", cal)
     save("status.json", status)
     # code de sortie 0 même en cas d'échec partiel : les échecs sont visibles dans status.json
     return 0
