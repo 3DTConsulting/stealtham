@@ -445,7 +445,11 @@ def update_calendar(cal: dict, log: dict) -> None:
         log["cal_DE"] = f"échec : {e}"
     # 3. France : calendrier indicatif de l'AFT, recalculé chaque jour
     doc = cal.setdefault("FR", {"country": "FR", "url": "https://www.aft.gouv.fr"})
-    doc["events"] = build_fr_calendar(today, dt.date.fromisoformat(end))
+    # les adjudications confirmées (indicative = false, renseignées par la tâche hebdomadaire) priment sur les dates calculées
+    confirmed = [e for e in doc.get("events", []) if e.get("indicative") is False]
+    taken = {(e["date"], e.get("short")) for e in confirmed}
+    gen = [e for e in build_fr_calendar(today, dt.date.fromisoformat(end)) if (e["date"], e["short"]) not in taken]
+    doc["events"] = sorted(confirmed + gen, key=lambda e: (e["date"], e["instrument"]))
     doc.update({"updated": t, "source": "AFT, règles du calendrier indicatif", "source_en": "AFT, indicative calendar rules",
                 "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
                 "note_en": "Dates computed from the AFT's published pattern (BTF on Mondays, long-term OATs on the 1st Thursday, medium-term and inflation-linked on the 3rd Thursday); to be confirmed by AFT announcements."})
