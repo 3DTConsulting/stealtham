@@ -286,6 +286,15 @@
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
   "events": [
    {
+    "date": "2026-10-15",
+    "instrument": "OAT moyen terme et indexées",
+    "instrument_en": "Medium-term and inflation-linked OATs",
+    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 19/10",
+    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 19/10",
+    "short": false,
+    "indicative": true
+   },
+   {
     "date": "2026-10-19",
     "instrument": "BTF",
     "instrument_en": "BTF",
@@ -313,6 +322,15 @@
     "indicative": true
    },
    {
+    "date": "2026-11-05",
+    "instrument": "OAT long terme",
+    "instrument_en": "Long-term OATs",
+    "detail": "plus de 8,5 ans ; règlement le 09/11",
+    "detail_en": "over 8.5 years; settlement on 09/11",
+    "short": false,
+    "indicative": true
+   },
+   {
     "date": "2026-11-09",
     "instrument": "BTF",
     "instrument_en": "BTF",
@@ -331,6 +349,15 @@
     "indicative": true
    },
    {
+    "date": "2026-11-19",
+    "instrument": "OAT moyen terme et indexées",
+    "instrument_en": "Medium-term and inflation-linked OATs",
+    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 23/11",
+    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 23/11",
+    "short": false,
+    "indicative": true
+   },
+   {
     "date": "2026-11-23",
     "instrument": "BTF",
     "instrument_en": "BTF",
@@ -346,6 +373,15 @@
     "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 02/12",
     "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 02/12",
     "short": true,
+    "indicative": true
+   },
+   {
+    "date": "2026-12-03",
+    "instrument": "OAT long terme",
+    "instrument_en": "Long-term OATs",
+    "detail": "plus de 8,5 ans ; règlement le 07/12",
+    "detail_en": "over 8.5 years; settlement on 07/12",
+    "short": false,
     "indicative": true
    },
    {
@@ -394,6 +430,15 @@
     "indicative": true
    },
    {
+    "date": "2027-01-07",
+    "instrument": "OAT long terme",
+    "instrument_en": "Long-term OATs",
+    "detail": "plus de 8,5 ans ; règlement le 11/01",
+    "detail_en": "over 8.5 years; settlement on 11/01",
+    "short": false,
+    "indicative": true
+   },
+   {
     "date": "2027-01-11",
     "instrument": "BTF",
     "instrument_en": "BTF",
@@ -409,51 +454,6 @@
     "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 20/01",
     "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 20/01",
     "short": true,
-    "indicative": true
-   },
-   {
-    "date": "2026-10-15",
-    "instrument": "OAT moyen terme et indexées",
-    "instrument_en": "Medium-term and inflation-linked OATs",
-    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 19/10",
-    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 19/10",
-    "short": false,
-    "indicative": true
-   },
-   {
-    "date": "2026-11-05",
-    "instrument": "OAT long terme",
-    "instrument_en": "Long-term OATs",
-    "detail": "plus de 8,5 ans ; règlement le 09/11",
-    "detail_en": "over 8.5 years; settlement on 09/11",
-    "short": false,
-    "indicative": true
-   },
-   {
-    "date": "2026-11-19",
-    "instrument": "OAT moyen terme et indexées",
-    "instrument_en": "Medium-term and inflation-linked OATs",
-    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 23/11",
-    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 23/11",
-    "short": false,
-    "indicative": true
-   },
-   {
-    "date": "2026-12-03",
-    "instrument": "OAT long terme",
-    "instrument_en": "Long-term OATs",
-    "detail": "plus de 8,5 ans ; règlement le 07/12",
-    "detail_en": "over 8.5 years; settlement on 07/12",
-    "short": false,
-    "indicative": true
-   },
-   {
-    "date": "2027-01-07",
-    "instrument": "OAT long terme",
-    "instrument_en": "Long-term OATs",
-    "detail": "plus de 8,5 ans ; règlement le 11/01",
-    "detail_en": "over 8.5 years; settlement on 11/01",
-    "short": false,
     "indicative": true
    },
    {
