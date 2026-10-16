@@ -1,7 +1,7 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-10-15",
+  "updated": "2026-10-16",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
@@ -280,20 +280,11 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-10-15",
+  "updated": "2026-10-16",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
   "events": [
-   {
-    "date": "2026-10-15",
-    "instrument": "OAT moyen terme et indexées",
-    "instrument_en": "Medium-term and inflation-linked OATs",
-    "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 19/10",
-    "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 19/10",
-    "short": false,
-    "indicative": true
-   },
    {
     "date": "2026-10-19",
     "instrument": "BTF",
