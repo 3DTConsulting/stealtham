@@ -1,31 +1,11 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-10-16",
+  "updated": "2026-10-19",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
-   {
-    "date": "2026-10-19",
-    "instrument": "Bubill",
-    "instrument_en": "Bubill",
-    "detail": "réouverture, échéance 17/03/2027",
-    "detail_en": "reopening, maturity 17/03/2027",
-    "short": true,
-    "isin": "DE000BU0E394",
-    "volume": "3,0 Md€"
-   },
-   {
-    "date": "2026-10-19",
-    "instrument": "Bubill",
-    "instrument_en": "Bubill",
-    "detail": "réouverture, échéance 15/09/2027",
-    "detail_en": "reopening, maturity 15/09/2027",
-    "short": true,
-    "isin": "DE000BU0E451",
-    "volume": "2,0 Md€"
-   },
    {
     "date": "2026-10-20",
     "instrument": "Bund",
@@ -280,7 +260,7 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-10-16",
+  "updated": "2026-10-19",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
@@ -454,6 +434,15 @@
     "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 25/01",
     "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 25/01",
     "short": false,
+    "indicative": true
+   },
+   {
+    "date": "2027-01-25",
+    "instrument": "BTF",
+    "instrument_en": "BTF",
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 27/01",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 27/01",
+    "short": true,
     "indicative": true
    }
   ],
