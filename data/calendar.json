@@ -1,31 +1,11 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
-   {
-    "date": "2026-10-20",
-    "instrument": "Bund",
-    "instrument_en": "Bund",
-    "detail": "réouverture, coupon 1,80 %, échéance 15/08/2053",
-    "detail_en": "reopening, 1.80% coupon, maturity 15/08/2053",
-    "short": false,
-    "isin": "DE0001030757",
-    "volume": "0,5 Md€"
-   },
-   {
-    "date": "2026-10-20",
-    "instrument": "Bobl",
-    "instrument_en": "Bobl",
-    "detail": "réouverture, coupon 2,10 %, échéance 12/04/2029",
-    "detail_en": "reopening, 2.10% coupon, maturity 12/04/2029",
-    "short": false,
-    "isin": "DE000BU35025",
-    "volume": "0,5 Md€"
-   },
    {
     "date": "2026-10-27",
     "instrument": "Schatz",
@@ -260,20 +240,11 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
   "events": [
-   {
-    "date": "2026-10-19",
-    "instrument": "BTF",
-    "instrument_en": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 21/10",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 21/10",
-    "short": true,
-    "indicative": true
-   },
    {
     "date": "2026-10-26",
     "instrument": "BTF",
@@ -456,14 +427,6 @@
   "url": "https://www.rivaluta.it/investimenti/calendario-aste-btp.asp",
   "note": "Dates programmées ; lignes confirmées par communiqué quelques jours avant.",
   "events": [
-   {
-    "date": "2026-10-19",
-    "instrument": "BTP Valore et BTP Valore Insieme",
-    "detail": "placement de détail du 19 au 23/10, 5 ans (échéance 27/10/2031) ; règlement le 27/10",
-    "short": false,
-    "instrument_en": "BTP Valore and BTP Valore Insieme",
-    "detail_en": "retail placement 19–23/10, 5 years (maturity 27/10/2031); settlement on 27/10"
-   },
    {
     "date": "2026-10-27",
     "instrument": "BTP Short Term et BTP€i",
