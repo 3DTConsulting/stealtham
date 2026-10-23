@@ -422,7 +422,7 @@
  },
  "IT": {
   "country": "IT",
-  "updated": "2026-10-16",
+  "updated": "2026-10-23",
   "source": "MEF, calendrier annuel des émissions (via source secondaire)",
   "url": "https://www.rivaluta.it/investimenti/calendario-aste-btp.asp",
   "note": "Dates programmées ; lignes confirmées par communiqué quelques jours avant.",
@@ -430,10 +430,11 @@
    {
     "date": "2026-10-27",
     "instrument": "BTP Short Term et BTP€i",
-    "detail": "règlement le 29/10",
+    "detail": "BTP Short Term 3,00 % 30/10/2028 (IT0005729733, 5e tranche) : 1,5 à 2,0 Md€ ; BTP€i 1,25 % 15/09/2032 : 0,5 à 0,75 Md€ ; règlement le 29/10",
     "short": false,
     "instrument_en": "BTP Short Term and BTP€i",
-    "detail_en": "settlement on 29/10"
+    "detail_en": "BTP Short Term 3.00% 30/10/2028 (IT0005729733, 5th tranche): €1.5–2.0bn; BTP€i 1.25% 15/09/2032: €0.5–0.75bn; settlement on 29/10",
+    "isin": "IT0005729733"
    },
    {
     "date": "2026-10-28",
@@ -454,10 +455,10 @@
    {
     "date": "2026-11-11",
     "instrument": "BOT",
-    "detail": "règlement le 13/11",
+    "detail": "12 mois (échéance 12/11/2027) ; règlement le 13/11",
     "short": true,
     "instrument_en": "BOT",
-    "detail_en": "settlement on 13/11"
+    "detail_en": "12 months (maturity 12/11/2027); settlement on 13/11"
    },
    {
     "date": "2026-11-12",
@@ -478,10 +479,10 @@
    {
     "date": "2026-11-26",
     "instrument": "BOT",
-    "detail": "règlement le 30/11",
+    "detail": "6 mois (échéance 31/05/2027) ; règlement le 30/11",
     "short": true,
     "instrument_en": "BOT",
-    "detail_en": "settlement on 30/11"
+    "detail_en": "6 months (maturity 31/05/2027); settlement on 30/11"
    },
    {
     "date": "2026-11-27",
@@ -494,10 +495,10 @@
    {
     "date": "2026-12-10",
     "instrument": "BOT",
-    "detail": "règlement le 14/12",
+    "detail": "12 mois (échéance 14/12/2027) ; règlement le 14/12",
     "short": true,
     "instrument_en": "BOT",
-    "detail_en": "settlement on 14/12"
+    "detail_en": "12 months (maturity 14/12/2027); settlement on 14/12"
    },
    {
     "date": "2026-12-11",
