@@ -1,7 +1,7 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-10-23",
+  "updated": "2026-10-26",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
@@ -240,7 +240,7 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-10-23",
+  "updated": "2026-10-26",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
@@ -413,6 +413,15 @@
     "instrument_en": "BTF",
     "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 27/01",
     "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 27/01",
+    "short": true,
+    "indicative": true
+   },
+   {
+    "date": "2027-02-01",
+    "instrument": "BTF",
+    "instrument_en": "BTF",
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 03/02",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 03/02",
     "short": true,
     "indicative": true
    }
