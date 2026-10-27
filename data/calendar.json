@@ -1,21 +1,11 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-10-26",
+  "updated": "2026-10-27",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
-   {
-    "date": "2026-10-27",
-    "instrument": "Schatz",
-    "instrument_en": "Schatz",
-    "detail": "réouverture, coupon 3,00 %, échéance 13/12/2028",
-    "detail_en": "reopening, 3.00% coupon, maturity 13/12/2028",
-    "short": false,
-    "isin": "DE000BU22155",
-    "volume": "5,0 Md€"
-   },
    {
     "date": "2026-10-28",
     "instrument": "Bund",
@@ -240,20 +230,11 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-10-26",
+  "updated": "2026-10-27",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
   "events": [
-   {
-    "date": "2026-10-26",
-    "instrument": "BTF",
-    "instrument_en": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 28/10",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 28/10",
-    "short": true,
-    "indicative": true
-   },
    {
     "date": "2026-11-02",
     "instrument": "BTF",
@@ -423,6 +404,15 @@
     "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 03/02",
     "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 03/02",
     "short": true,
+    "indicative": true
+   },
+   {
+    "date": "2027-02-04",
+    "instrument": "OAT long terme",
+    "instrument_en": "Long-term OATs",
+    "detail": "plus de 8,5 ans ; règlement le 08/02",
+    "detail_en": "over 8.5 years; settlement on 08/02",
+    "short": false,
     "indicative": true
    }
   ],
