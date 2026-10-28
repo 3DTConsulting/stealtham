@@ -1,21 +1,11 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
-   {
-    "date": "2026-10-28",
-    "instrument": "Bund",
-    "instrument_en": "Bund",
-    "detail": "réouverture, coupon 3,00 %, échéance 15/08/2036",
-    "detail_en": "reopening, 3.00% coupon, maturity 15/08/2036",
-    "short": false,
-    "isin": "DE000BU2Z072",
-    "volume": "5,5 Md€"
-   },
    {
     "date": "2026-11-02",
     "instrument": "Bubill",
@@ -230,7 +220,7 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
@@ -426,15 +416,6 @@
   "url": "https://www.rivaluta.it/investimenti/calendario-aste-btp.asp",
   "note": "Dates programmées ; lignes confirmées par communiqué quelques jours avant.",
   "events": [
-   {
-    "date": "2026-10-27",
-    "instrument": "BTP Short Term et BTP€i",
-    "detail": "BTP Short Term 3,00 % 30/10/2028 (IT0005729733, 5e tranche) : 1,5 à 2,0 Md€ ; BTP€i 1,25 % 15/09/2032 : 0,5 à 0,75 Md€ ; règlement le 29/10",
-    "short": false,
-    "instrument_en": "BTP Short Term and BTP€i",
-    "detail_en": "BTP Short Term 3.00% 30/10/2028 (IT0005729733, 5th tranche): €1.5–2.0bn; BTP€i 1.25% 15/09/2032: €0.5–0.75bn; settlement on 29/10",
-    "isin": "IT0005729733"
-   },
    {
     "date": "2026-10-28",
     "instrument": "BOT",

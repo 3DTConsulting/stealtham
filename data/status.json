@@ -1,15 +1,15 @@
 {
- "lastRun": "2026-10-27T20:36:14Z",
+ "lastRun": "2026-10-28T20:57:07Z",
  "note": "mis à jour : courbe DE 1 an, courbe DE 2 ans, TEC FR 1 an, TEC FR 2 ans, prix DE par ISIN, BOT italiens, calendrier DE, calendrier FR",
  "note_en": "updated: DE curve 1y, DE curve 2y, FR TEC 1y, FR TEC 2y, DE ISIN prices, Italian BOT, DE calendar, FR calendar",
  "sources": {
-  "bbk_1Y": "ok, dernière valeur 2026-10-27",
-  "bbk_2Y": "ok, dernière valeur 2026-10-27",
-  "tec_1Y": "ok, dernière valeur 2026-10-27",
-  "tec_2Y": "ok, dernière valeur 2026-10-27",
-  "bbk_isin": "ok, 13 lignes au 2026-10-27",
-  "bot": "ok, 16 BOT au 2026-10-27",
-  "cal_DE": "ok, 22 adjudications",
+  "bbk_1Y": "ok, dernière valeur 2026-10-28",
+  "bbk_2Y": "ok, dernière valeur 2026-10-28",
+  "tec_1Y": "ok, dernière valeur 2026-10-28",
+  "tec_2Y": "ok, dernière valeur 2026-10-28",
+  "bbk_isin": "ok, 13 lignes au 2026-10-28",
+  "bot": "ok, 16 BOT au 2026-10-28",
+  "cal_DE": "ok, 21 adjudications",
   "cal_FR": "ok, 20 adjudications indicatives"
  }
 }
