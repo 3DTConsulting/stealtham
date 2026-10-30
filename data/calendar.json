@@ -1,7 +1,7 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-10-29",
+  "updated": "2026-10-30",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
@@ -221,7 +221,7 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-10-29",
+  "updated": "2026-10-30",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
