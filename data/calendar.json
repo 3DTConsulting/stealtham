@@ -412,19 +412,11 @@
  },
  "IT": {
   "country": "IT",
-  "updated": "2026-10-23",
+  "updated": "2026-10-30",
   "source": "MEF, calendrier annuel des émissions (via source secondaire)",
   "url": "https://www.rivaluta.it/investimenti/calendario-aste-btp.asp",
   "note": "Dates programmées ; lignes confirmées par communiqué quelques jours avant.",
   "events": [
-   {
-    "date": "2026-10-29",
-    "instrument": "BTP moyen-long terme",
-    "detail": "règlement le 02/11",
-    "short": false,
-    "instrument_en": "Medium/long-term BTP",
-    "detail_en": "settlement on 02/11"
-   },
    {
     "date": "2026-11-11",
     "instrument": "BOT",
@@ -487,7 +479,7 @@
  },
  "ES": {
   "country": "ES",
-  "updated": "2026-10-16",
+  "updated": "2026-10-30",
   "source": "Tesoro Público, calendriers 2026 des Letras et des Bonos y Obligaciones (BOE) et Banque d'Espagne",
   "url": "https://boe.es/boe/dias/2026/01/14/pdfs/BOE-A-2026-830.pdf",
   "note": "Calendrier des Letras et des Bonos y Obligaciones publié au BOE ; lignes des Bonos annoncées par le Tesoro avant chaque adjudication.",
@@ -571,6 +563,22 @@
     "short": true,
     "instrument_en": "Letras",
     "detail_en": "6 months (09/07/2027) and 12 months (14/01/2028); issue on 15/01"
+   },
+   {
+    "date": "2027-01-19",
+    "instrument": "Letras",
+    "detail": "3 mois (09/04/2027) et 9 mois (08/10/2027) ; émission le 22/01",
+    "short": true,
+    "instrument_en": "Letras",
+    "detail_en": "3 months (09/04/2027) and 9 months (08/10/2027); issue on 22/01"
+   },
+   {
+    "date": "2027-01-21",
+    "instrument": "Bonos y Obligaciones",
+    "detail": "lignes annoncées par le Tesoro ; émission le 26/01",
+    "short": false,
+    "instrument_en": "Bonos y Obligaciones",
+    "detail_en": "lines announced by the Tesoro; issue on 26/01"
    }
   ],
   "source_en": "Tesoro Público, 2026 Letras and Bonos y Obligaciones calendars (BOE) and Banco de España",
