@@ -7,16 +7,6 @@
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
    {
-    "date": "2026-11-03",
-    "instrument": "Bobl",
-    "instrument_en": "Bobl",
-    "detail": "réouverture, coupon 2,90 %, échéance 08/10/2031",
-    "detail_en": "reopening, 2.90% coupon, maturity 08/10/2031",
-    "short": false,
-    "isin": "DE000BU25075",
-    "volume": "5,0 Md€"
-   },
-   {
     "date": "2026-11-04",
     "instrument": "Bund",
     "instrument_en": "Bund",
