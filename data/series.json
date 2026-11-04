@@ -1,7 +1,7 @@
 {
  "DE-svensson": {
   "source": "Bundesbank, courbe des taux des titres fédéraux (Svensson), valeurs quotidiennes",
-  "updated": "2026-11-03",
+  "updated": "2026-11-04",
   "tenors": {
    "1Y": [
     [
@@ -611,6 +611,10 @@
     [
      "2026-11-03",
      2.93
+    ],
+    [
+     "2026-11-04",
+     2.94
     ]
    ],
    "2Y": [
@@ -1221,13 +1225,17 @@
     [
      "2026-11-03",
      3.04
+    ],
+    [
+     "2026-11-04",
+     3.05
     ]
    ]
   }
  },
  "FR-tec": {
   "source": "Banque de France (Webstat), taux de l'échéance constante (TEC)",
-  "updated": "2026-11-03",
+  "updated": "2026-11-04",
   "tenors": {
    "1Y": [
     [
@@ -1677,6 +1685,10 @@
     [
      "2026-11-03",
      3.368
+    ],
+    [
+     "2026-11-04",
+     3.342
     ]
    ],
    "2Y": [
@@ -1991,6 +2003,10 @@
     [
      "2026-11-03",
      3.663
+    ],
+    [
+     "2026-11-04",
+     3.636
     ]
    ]
   }
