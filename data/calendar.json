@@ -1,7 +1,7 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
@@ -172,20 +172,11 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
   "events": [
-   {
-    "date": "2026-11-05",
-    "instrument": "OAT long terme",
-    "instrument_en": "Long-term OATs",
-    "detail": "plus de 8,5 ans ; règlement le 09/11",
-    "detail_en": "over 8.5 years; settlement on 09/11",
-    "short": false,
-    "indicative": true
-   },
    {
     "date": "2026-11-09",
     "instrument": "BTF",
@@ -435,14 +426,6 @@
   "url": "https://boe.es/boe/dias/2026/01/14/pdfs/BOE-A-2026-830.pdf",
   "note": "Calendrier des Letras et des Bonos y Obligaciones publié au BOE ; lignes des Bonos annoncées par le Tesoro avant chaque adjudication.",
   "events": [
-   {
-    "date": "2026-11-05",
-    "instrument": "Bonos y Obligaciones",
-    "detail": "lignes annoncées par le Tesoro ; émission le 10/11",
-    "short": false,
-    "instrument_en": "Bonos y Obligaciones",
-    "detail_en": "lines announced by the Tesoro; issue on 10/11"
-   },
    {
     "date": "2026-11-10",
     "instrument": "Letras",
