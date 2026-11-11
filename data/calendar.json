@@ -1,31 +1,11 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
-   {
-    "date": "2026-11-11",
-    "instrument": "Bund",
-    "instrument_en": "Bund",
-    "detail": "réouverture, coupon 2,90 %, échéance 15/08/2056",
-    "detail_en": "reopening, 2.90% coupon, maturity 15/08/2056",
-    "short": false,
-    "isin": "DE000BU2D012",
-    "volume": "1,5 Md€"
-   },
-   {
-    "date": "2026-11-11",
-    "instrument": "Bund",
-    "instrument_en": "Bund",
-    "detail": "réouverture, coupon 3,40 %, échéance 15/05/2047",
-    "detail_en": "reopening, 3.40% coupon, maturity 15/05/2047",
-    "short": false,
-    "isin": "DE000BU2T000",
-    "volume": "1,0 Md€"
-   },
    {
     "date": "2026-11-16",
     "instrument": "Bubill",
@@ -152,7 +132,7 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
@@ -415,14 +395,6 @@
   "url": "https://boe.es/boe/dias/2026/01/14/pdfs/BOE-A-2026-830.pdf",
   "note": "Calendrier des Letras et des Bonos y Obligaciones publié au BOE ; lignes des Bonos annoncées par le Tesoro avant chaque adjudication.",
   "events": [
-   {
-    "date": "2026-11-10",
-    "instrument": "Letras",
-    "detail": "3 mois (05/02/2027) et 9 mois (06/08/2027) ; émission le 13/11",
-    "short": true,
-    "instrument_en": "Letras",
-    "detail_en": "3 months (05/02/2027) and 9 months (06/08/2027); issue on 13/11"
-   },
    {
     "date": "2026-11-19",
     "instrument": "Bonos y Obligaciones",
