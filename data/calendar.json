@@ -1,31 +1,11 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-11-13",
+  "updated": "2026-11-17",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
-   {
-    "date": "2026-11-16",
-    "instrument": "Bubill",
-    "instrument_en": "Bubill",
-    "detail": "réouverture, échéance 12/05/2027",
-    "detail_en": "reopening, maturity 12/05/2027",
-    "short": true,
-    "isin": "DE000BU0E410",
-    "volume": "3,0 Md€"
-   },
-   {
-    "date": "2026-11-16",
-    "instrument": "Bubill",
-    "instrument_en": "Bubill",
-    "detail": "nouvelle ligne, échéance 16/11/2027",
-    "detail_en": "new line, maturity 16/11/2027",
-    "short": true,
-    "isin": "DE000BU0E477",
-    "volume": "3,0 Md€"
-   },
    {
     "date": "2026-11-17",
     "instrument": "Schatz",
@@ -132,20 +112,11 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-11-13",
+  "updated": "2026-11-17",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
   "events": [
-   {
-    "date": "2026-11-16",
-    "instrument": "BTF",
-    "instrument_en": "BTF",
-    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 18/11",
-    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 18/11",
-    "short": true,
-    "indicative": true
-   },
    {
     "date": "2026-11-19",
     "instrument": "OAT moyen terme et indexées",
@@ -315,6 +286,15 @@
     "detail": "2 à 8,5 ans, OATi et OAT€i ; règlement le 22/02",
     "detail_en": "2 to 8.5 years, OATi and OAT€i; settlement on 22/02",
     "short": false,
+    "indicative": true
+   },
+   {
+    "date": "2027-02-22",
+    "instrument": "BTF",
+    "instrument_en": "BTF",
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 24/02",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 24/02",
+    "short": true,
     "indicative": true
    }
   ],
