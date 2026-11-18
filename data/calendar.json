@@ -7,16 +7,6 @@
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
   "events": [
    {
-    "date": "2026-11-18",
-    "instrument": "Bund",
-    "instrument_en": "Bund",
-    "detail": "réouverture, coupon 3,30 %, échéance 15/11/2033",
-    "detail_en": "reopening, 3.30% coupon, maturity 15/11/2033",
-    "short": false,
-    "isin": "DE000BU27022",
-    "volume": "3,0 Md€"
-   },
-   {
     "date": "2026-11-23",
     "instrument": "Bubill",
     "instrument_en": "Bubill",

@@ -1,7 +1,7 @@
 {
  "DE-svensson": {
   "source": "Bundesbank, courbe des taux des titres fédéraux (Svensson), valeurs quotidiennes",
-  "updated": "2026-11-17",
+  "updated": "2026-11-18",
   "tenors": {
    "1Y": [
     [
@@ -651,6 +651,10 @@
     [
      "2026-11-17",
      2.99
+    ],
+    [
+     "2026-11-18",
+     3.01
     ]
    ],
    "2Y": [
@@ -1301,6 +1305,10 @@
     [
      "2026-11-17",
      3.11
+    ],
+    [
+     "2026-11-18",
+     3.12
     ]
    ]
   }
