@@ -1,7 +1,7 @@
 {
  "DE": {
   "country": "DE",
-  "updated": "2026-11-27",
+  "updated": "2026-11-28",
   "source": "Finanzagentur, calendrier d'émission",
   "url": "https://www.deutsche-finanzagentur.de/en/federal-securities/issuances/issuance-calendar",
   "note": "Montants et dates susceptibles d'évoluer ; émissions vertes et syndications annoncées peu avant.",
@@ -62,7 +62,7 @@
  },
  "FR": {
   "country": "FR",
-  "updated": "2026-11-27",
+  "updated": "2026-11-28",
   "source": "AFT, règles du calendrier indicatif",
   "url": "https://eco3min.fr/calendrier-adjudications-aft/",
   "note": "Dates calculées selon le rythme publié par l'AFT (BTF le lundi, OAT long terme le 1er jeudi, moyen terme et indexées le 3e jeudi) ; à confirmer par les annonces de l'AFT.",
@@ -246,6 +246,15 @@
     "detail_en": "over 8.5 years; settlement on 08/03",
     "short": false,
     "indicative": true
+   },
+   {
+    "date": "2027-03-08",
+    "instrument": "BTF",
+    "instrument_en": "BTF",
+    "detail": "adjudication hebdomadaire, lignes et montants annoncés le jeudi précédent ; règlement le 10/03",
+    "detail_en": "weekly auction, lines and amounts announced the previous Thursday; settlement on 10/03",
+    "short": true,
+    "indicative": true
    }
   ],
   "source_en": "AFT, indicative calendar rules",
@@ -258,14 +267,6 @@
   "url": "https://www.rivaluta.it/investimenti/calendario-aste-btp.asp",
   "note": "Dates programmées ; lignes confirmées par communiqué quelques jours avant.",
   "events": [
-   {
-    "date": "2026-11-27",
-    "instrument": "BTP moyen-long terme",
-    "detail": "règlement le 01/12",
-    "short": false,
-    "instrument_en": "Medium/long-term BTP",
-    "detail_en": "settlement on 01/12"
-   },
    {
     "date": "2026-12-10",
     "instrument": "BOT",
